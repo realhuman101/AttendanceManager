@@ -4,24 +4,29 @@ using Server.Interfaces;
 
 namespace Server.Repository
 {
-    public class People : IPeopleRepository
+    public class People : IRepository<Person>
     {
         private readonly DataContext dataContext;
-        public List<Person> people { get; set; }
+        public List<Person> allObjs { get; set; }
 
         public People(DataContext context)
         {
             this.dataContext = context;
         }
 
-        public List<Person> GetPeople()
+        public List<Person> Get()
         {
             return dataContext.People.OrderBy(p => p.ID).ToList();
         }
 
-        public Person GetPerson(int id)
+        public Person GetSpec(int id)
         {
             return dataContext.People.FirstOrDefault(p => p.ID == id);
+        }
+
+        public bool Save()
+        {
+            return dataContext.SaveChanges() >= 0; // Returns true if changes were saved
         }
     }
 }
