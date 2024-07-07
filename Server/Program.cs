@@ -26,7 +26,14 @@ namespace Server
             builder.Services.AddDbContext<DataContext>(options =>
                            options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+            // Build App
             var app = builder.Build();
+
+            // Seed Data
+            if (args.Length == 1 && args[0].ToLower() == "seeddata")
+            {
+                SeedData(app);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -43,6 +50,17 @@ namespace Server
             app.MapControllers();
 
             app.Run();
+        }
+
+        public void SeedData(IHost app)
+        {
+            var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+            using (var scope = scopedFactory.CreateScope())
+            {
+                var service = scope.ServiceProvider.GetService<Seed>();
+                service.SeedData();
+            }
         }
     }
 }
