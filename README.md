@@ -1,15 +1,19 @@
 # <div align="center">Attendance Master</div>
 
-<div align="center"><i> An app to manage people attending and leaving the event</i></div>
+<div align="center"><i> An application to manage people attending and leaving the event</i></div>
 
 ***
 
 ## Table of Contents
 
-- [Project Title](#project-title)
+- [Attendance Master](#attendance-master)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
 
 ## Introduction
 
-To be written
+Proper introduction to be written
+
+This is made with React.js as the frontend, with C# (ASP.NET) and MSSQL for the backend.
+
+Frontend is stored in the `client` folder while the backend is stored in the `server` folder.
