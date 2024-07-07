@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+
+using Server.Models;
 
 namespace Server
 {

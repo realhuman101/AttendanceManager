@@ -4,6 +4,7 @@
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public List<Class> Classes { get; set; }
+        public bool Present { get; set; }
+        public string Email { get; set; }
     }
 }
