@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 
 using Server.Models;
+using Server.Data;
 
 namespace Server
 {
@@ -17,6 +18,9 @@ namespace Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<DataContext>(options =>
+                           options.UseSqlServer());
 
             var app = builder.Build();
 
