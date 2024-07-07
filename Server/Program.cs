@@ -18,7 +18,8 @@ namespace Server
 
             builder.Services.AddControllers();
             builder.Services.AddTransient<Seed>();
-            builder.Services.AddScoped<IRepository<Person>, People>();
+            builder.Services.AddScoped<IRepository<Person>, PeopleRepository>();
+            builder.Services.AddScoped<IRepository<Class>, ClassesRepository>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
