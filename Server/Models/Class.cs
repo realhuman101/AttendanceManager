@@ -7,6 +7,6 @@
         public string Room { get; set; }
         public int NoPeople { get; set; } // Number of people in the class
 
-        public ICollection<ClassList> ClassLists { get; set; }
+        public List<ClassList> ClassLists { get; set; }
     }
 }
