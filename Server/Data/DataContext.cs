@@ -16,33 +16,15 @@ namespace Server.Data
         {
             modelBuilder.Entity<ClassList>()
                 .HasKey(cl => new { cl.PersonID, cl.ClassID });
-
-            // Many-to-many relationships
-
-            // Person to ClassList
+            
             modelBuilder.Entity<ClassList>()
                 .HasOne(cl => cl.Person)
-                .WithMany(cl => cl.ClassLists)
+                .WithMany(p => p.ClassLists)
                 .HasForeignKey(cl => cl.PersonID);
 
-            // Class to ClassList
             modelBuilder.Entity<ClassList>()
                 .HasOne(cl => cl.Class)
-                .WithMany(cl => cl.ClassLists)
-                .HasForeignKey(cl => cl.ClassID);
-
-            // One-to-many relationships
-
-            // Class to Person
-            modelBuilder.Entity<Person>()
-                .HasMany(p => p.ClassLists)
-                .WithOne(cl => cl.Person)
-                .HasForeignKey(cl => cl.PersonID);
-
-            // Person to Class
-            modelBuilder.Entity<Class>()
-                .HasMany(c => c.ClassLists)
-                .WithOne(cl => cl.Class)
+                .WithMany(c => c.ClassLists)
                 .HasForeignKey(cl => cl.ClassID);
         }
     }
