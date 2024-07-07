@@ -4,12 +4,12 @@ using Server.Interfaces;
 
 namespace Server.Repository
 {
-    public class People : IRepository<Person>
+    public class PeopleRepository : IRepository<Person>
     {
         private readonly DataContext dataContext;
         public List<Person> allObjs { get; set; }
 
-        public People(DataContext context)
+        public PeopleRepository(DataContext context)
         {
             this.dataContext = context;
         }

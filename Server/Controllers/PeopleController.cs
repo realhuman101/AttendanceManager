@@ -18,7 +18,7 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(List<People>))]
+        [ProducesResponseType(200, Type = typeof(List<PeopleRepository>))]
         public IActionResult GetPeople()
         {
             var people = _peopleRepository.Get();
@@ -32,7 +32,7 @@ namespace Server.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(200, Type = typeof(People))]
+        [ProducesResponseType(200, Type = typeof(PeopleRepository))]
         public IActionResult GetPerson(int id)
         {
             var person = _peopleRepository.GetByID(id);
