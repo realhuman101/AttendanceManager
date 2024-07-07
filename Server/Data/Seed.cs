@@ -13,7 +13,7 @@ namespace Server.Data
 
         public void SeedData()
         {
-            if (!context.ClassLists.Any())
+            if (!dataContext.ClassLists.Any())
             {
                 // TODO: Write after get student list
 
