@@ -27,7 +27,7 @@ namespace Server
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<DataContext>(options =>
-                           options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+                           options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
 
             // Build App
             var app = builder.Build();
