@@ -1,0 +1,6 @@
+@CoCoAttendanceMaster_HostAddress = http://localhost:5057
+
+GET {{CoCoAttendanceMaster_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
