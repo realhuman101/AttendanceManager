@@ -19,7 +19,7 @@ namespace Server.Repository
             return dataContext.People.OrderBy(p => p.ID).ToList();
         }
 
-        public Person GetSpec(int id)
+        public Person GetByID(int id)
         {
             return dataContext.People.FirstOrDefault(p => p.ID == id);
         }

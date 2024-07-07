@@ -8,7 +8,7 @@ namespace Server.Interfaces
 
         public List<Model> Get();
 
-        public Model GetSpec(int id);
+        public Model GetByID(int id);
 
         public bool Save();
     }
