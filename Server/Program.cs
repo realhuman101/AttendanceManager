@@ -1,5 +1,5 @@
 
-namespace CoCoAttendanceMaster
+namespace Server
 {
     public class Program
     {
