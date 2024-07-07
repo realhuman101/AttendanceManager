@@ -44,5 +44,23 @@ namespace Server.Controllers
 
             return Ok(person);
         }
+
+        [HttpPost("{id}&{state}")]
+        [ProducesResponseType(200)]
+        public IActionResult UpdatePerson(int id, bool state)
+        {
+            Person person = _peopleRepository.GetByID(id);
+
+            if (id != person.ID)
+            {
+                return BadRequest();
+            }
+
+            person.Present = state;
+
+            _peopleRepository.Save();
+
+            return NoContent();
+        }
     }
 }
