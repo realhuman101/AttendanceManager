@@ -8,7 +8,7 @@ namespace Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +52,7 @@ namespace Server
             app.Run();
         }
 
-        public void SeedData(IHost app)
+        public static void SeedData(IHost app)
         {
             var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
