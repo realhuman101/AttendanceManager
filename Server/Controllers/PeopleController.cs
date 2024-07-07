@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using Server.Interfaces;
+using Server.Models;
 using Server.Repository;
 
 namespace Server.Controllers
@@ -9,9 +10,9 @@ namespace Server.Controllers
     [ApiController]
     public class PeopleController : Controller
     {
-        private readonly IPeopleRepository _peopleRepository;
+        private readonly IRepository<Person> _peopleRepository;
 
-        public PeopleController(IPeopleRepository peopleRepository)
+        public PeopleController(IRepository<Person> peopleRepository)
         {
             _peopleRepository = peopleRepository;
         }
@@ -20,7 +21,7 @@ namespace Server.Controllers
         [ProducesResponseType(200, Type = typeof(List<People>))]
         public IActionResult GetPeople()
         {
-            var people = _peopleRepository.GetPeople();
+            var people = _peopleRepository.Get();
 
             if (!ModelState.IsValid)
             {
@@ -34,7 +35,7 @@ namespace Server.Controllers
         [ProducesResponseType(200, Type = typeof(People))]
         public IActionResult GetPerson(int id)
         {
-            var person = _peopleRepository.GetPerson(id);
+            var person = _peopleRepository.GetByID(id);
 
             if (person == null)
             {
