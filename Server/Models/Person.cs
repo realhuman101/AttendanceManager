@@ -7,6 +7,6 @@
         public bool Present { get; set; }
         public string Email { get; set; }
 
-        public ICollection<Class> Classes { get; set; }
+        public ICollection<ClassList> ClassLists { get; set; }
     }
 }
