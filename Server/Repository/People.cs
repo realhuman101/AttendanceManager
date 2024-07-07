@@ -18,5 +18,10 @@ namespace Server.Repository
         {
             return dataContext.People.OrderBy(p => p.ID).ToList();
         }
+
+        public Person GetPerson(int id)
+        {
+            return dataContext.People.FirstOrDefault(p => p.ID == id);
+        }
     }
 }

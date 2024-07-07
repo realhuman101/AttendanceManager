@@ -7,5 +7,7 @@ namespace Server.Interfaces
         public List<Person> people { get; set; }
 
         public List<Person> GetPeople();
+
+        public Person GetPerson(int id);
     }
 }

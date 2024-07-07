@@ -29,5 +29,19 @@ namespace Server.Controllers
 
             return Ok(people);
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(People))]
+        public IActionResult GetPerson(int id)
+        {
+            var person = _peopleRepository.GetPerson(id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(person);
+        }
     }
 }
