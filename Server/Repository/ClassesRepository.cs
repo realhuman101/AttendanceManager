@@ -6,26 +6,26 @@ namespace Server.Repository
 {
     public class ClassesRepository : IRepository<Class>
     {
-        public List<Class> allObjs { get; set; }
+        private readonly DataContext dataContext;
 
         public ClassesRepository(DataContext context)
         {
-            allObjs = context.Classes.ToList();
+            dataContext = context;
         }
 
         public List<Class> Get()
         {
-            return allObjs;
+            return dataContext.Classes.ToList();
         }
 
         public Class GetByID(int id)
         {
-            return allObjs.FirstOrDefault(c => c.ID == id);
+            return dataContext.Classes.FirstOrDefault(c => c.ID == id);
         }
 
         public bool Save()
         {
-            return true;
+            return dataContext.SaveChanges() >= 0; // Returns true if changes were saved
         }
     }
 }

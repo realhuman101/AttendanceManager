@@ -7,11 +7,10 @@ namespace Server.Repository
     public class PeopleRepository : IRepository<Person>
     {
         private readonly DataContext dataContext;
-        public List<Person> allObjs { get; set; }
 
         public PeopleRepository(DataContext context)
         {
-            this.dataContext = context;
+            dataContext = context;
         }
 
         public List<Person> Get()
