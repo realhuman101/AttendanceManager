@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Builder;
 
 using Server.Models;
 using Server.Data;
+using Server.Repository;
+using Server.Interfaces;
 
 namespace Server
 {
@@ -15,6 +17,8 @@ namespace Server
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddTransient<Seed>();
+            builder.Services.AddScoped<IPeopleRepository, People>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
