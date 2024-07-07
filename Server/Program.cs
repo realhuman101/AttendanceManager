@@ -12,6 +12,10 @@ namespace Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Connect to secrets
+            builder.Configuration
+                .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Secrets.json");
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -20,7 +24,7 @@ namespace Server
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<DataContext>(options =>
-                           options.UseSqlServer());
+                           options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             var app = builder.Build();
 
