@@ -15,7 +15,7 @@ namespace Server.Repository
 
         public List<Person> Get()
         {
-            return dataContext.People.OrderBy(p => p.ID).ToList();
+            return dataContext.People.ToList();
         }
 
         public Person GetByID(int id)
