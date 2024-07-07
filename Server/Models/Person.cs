@@ -7,6 +7,6 @@
         public bool Present { get; set; }
         public string Email { get; set; }
 
-        public List<ClassList> ClassLists { get; set; }
+        public virtual List<ClassList> ClassLists { get; set; }
     }
 }
