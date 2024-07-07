@@ -30,6 +30,20 @@ namespace Server.Data
                 .HasOne(cl => cl.Class)
                 .WithMany(cl => cl.ClassLists)
                 .HasForeignKey(cl => cl.ClassID);
+
+            // One-to-many relationships
+
+            // Class to Person
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.ClassLists)
+                .WithOne(cl => cl.Person)
+                .HasForeignKey(cl => cl.PersonID);
+
+            // Person to Class
+            modelBuilder.Entity<Class>()
+                .HasMany(c => c.ClassLists)
+                .WithOne(cl => cl.Class)
+                .HasForeignKey(cl => cl.ClassID);
         }
     }
 }
