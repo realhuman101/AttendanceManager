@@ -6,7 +6,7 @@ using Server.Repository;
 
 namespace Server.Controllers
 {
-    [Route("/api/[controller]")]
+    [Route("/api/people/[controller]")]
     [ApiController]
     public class PeopleController : Controller
     {
