@@ -12,10 +12,6 @@ namespace Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Connect to secrets
-            builder.Configuration
-                .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Secrets.json");
-
             // Add services to the container.
 
             builder.Services.AddControllers();
