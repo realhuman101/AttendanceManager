@@ -16,7 +16,11 @@ namespace Server
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                            .AddJsonOptions(options => {
+                                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                            });
 
             builder.Services.AddScoped<IRepository<Person>, PeopleRepository>();
             builder.Services.AddScoped<IRepository<Class>, ClassesRepository>();

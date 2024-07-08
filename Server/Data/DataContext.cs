@@ -8,25 +8,19 @@ namespace Server.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<ClassList> ClassLists { get; set; }
-        public DbSet<Class> Classes { get; set; }
-        public DbSet<Person> People { get; set; }
+        public DbSet<Class> Classes => Set<Class>();
+        public DbSet<Person> People => Set<Person>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure the join table
-            modelBuilder.Entity<ClassList>()
-                .HasKey(cl => new { cl.PersonID, cl.ClassID });
-
             modelBuilder.Entity<Person>()
                 .HasMany(cl => cl.Classes)
                 .WithMany(p => p.People)
-                .UsingEntity<ClassList>();
-
-            modelBuilder.Entity<Class>()
-                .HasMany(cl => cl.People)
-                .WithMany(c => c.Classes)
-                .UsingEntity<ClassList>();
+                .UsingEntity<ClassList>(
+                    l => l.HasOne<Class>(e => e.Class).WithMany(e => e.ClassLists).HasForeignKey(e => e.ClassID),
+                    r => r.HasOne<Person>(e => e.Person).WithMany(e => e.ClassLists).HasForeignKey(e => e.PersonID)
+                );
 
             // Seed data
 
