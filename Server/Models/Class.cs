@@ -5,6 +5,7 @@ namespace Server.Models
 {
     public class Class
     {
+        [Key]
         public int ID { get; set; }
 
         public DateTime StartTime { get; set; }
@@ -13,6 +14,6 @@ namespace Server.Models
         public string Room { get; set; } = null!;
         public int NoPeople { get; set; } // Number of people in the class
 
-        public virtual List<int> People { get; set; } = null!;
+        public virtual ICollection<Person> People { get; set; } = null!;
     }
 }
