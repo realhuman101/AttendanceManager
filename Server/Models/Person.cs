@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+using Server.Interfaces;
+
 namespace Server.Models
 {
-    public class Person
+    public class Person : IBaseObject
     {
+        [Key]
         public int ID { get; set; }
 
         public string Name { get; set; } = null!;

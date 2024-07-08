@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+using Server.Interfaces;
+
 namespace Server.Models
 {
-    public class Class
+    public class Class : IBaseObject
     {
         [Key]
         public int ID { get; set; }
