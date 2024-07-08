@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240708161933_ProperMigration")]
+    partial class ProperMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,33 +81,6 @@ namespace Server.Migrations
                             NoPeople = 20,
                             Room = "Room 103",
                             StartTime = new DateTime(2021, 9, 1, 13, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 4,
-                            EndTime = new DateTime(2021, 9, 1, 16, 30, 0, 0, DateTimeKind.Unspecified),
-                            Name = "English Literature",
-                            NoPeople = 22,
-                            Room = "Room 104",
-                            StartTime = new DateTime(2021, 9, 1, 15, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 5,
-                            EndTime = new DateTime(2021, 9, 2, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Computer Science",
-                            NoPeople = 18,
-                            Room = "Room 105",
-                            StartTime = new DateTime(2021, 9, 2, 9, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 6,
-                            EndTime = new DateTime(2021, 9, 2, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Philosophy",
-                            NoPeople = 15,
-                            Room = "Room 106",
-                            StartTime = new DateTime(2021, 9, 2, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -123,7 +96,7 @@ namespace Server.Migrations
 
                     b.HasIndex("ClassID");
 
-                    b.ToTable("ClassLists");
+                    b.ToTable("ClassList");
 
                     b.HasData(
                         new
@@ -144,52 +117,12 @@ namespace Server.Migrations
                         new
                         {
                             PersonID = 3,
-                            ClassID = 3
-                        },
-                        new
-                        {
-                            PersonID = 4,
                             ClassID = 1
                         },
                         new
                         {
-                            PersonID = 5,
-                            ClassID = 4
-                        },
-                        new
-                        {
-                            PersonID = 5,
-                            ClassID = 5
-                        },
-                        new
-                        {
-                            PersonID = 6,
-                            ClassID = 5
-                        },
-                        new
-                        {
-                            PersonID = 7,
-                            ClassID = 6
-                        },
-                        new
-                        {
-                            PersonID = 8,
-                            ClassID = 6
-                        },
-                        new
-                        {
-                            PersonID = 9,
-                            ClassID = 4
-                        },
-                        new
-                        {
-                            PersonID = 10,
+                            PersonID = 3,
                             ClassID = 3
-                        },
-                        new
-                        {
-                            PersonID = 10,
-                            ClassID = 6
                         });
                 });
 
@@ -237,68 +170,19 @@ namespace Server.Migrations
                             Email = "alice.johnson@example.com",
                             Name = "Alice Johnson",
                             Present = true
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Email = "mark.brown@example.com",
-                            Name = "Mark Brown",
-                            Present = true
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Email = "lucy.green@example.com",
-                            Name = "Lucy Green",
-                            Present = true
-                        },
-                        new
-                        {
-                            ID = 6,
-                            Email = "emma.white@example.com",
-                            Name = "Emma White",
-                            Present = false
-                        },
-                        new
-                        {
-                            ID = 7,
-                            Email = "noah.wilson@example.com",
-                            Name = "Noah Wilson",
-                            Present = true
-                        },
-                        new
-                        {
-                            ID = 8,
-                            Email = "liam.murphy@example.com",
-                            Name = "Liam Murphy",
-                            Present = true
-                        },
-                        new
-                        {
-                            ID = 9,
-                            Email = "sophia.davis@example.com",
-                            Name = "Sophia Davis",
-                            Present = true
-                        },
-                        new
-                        {
-                            ID = 10,
-                            Email = "ethan.miller@example.com",
-                            Name = "Ethan Miller",
-                            Present = false
                         });
                 });
 
             modelBuilder.Entity("Server.Models.ClassList", b =>
                 {
                     b.HasOne("Server.Models.Class", "Class")
-                        .WithMany("ClassLists")
+                        .WithMany()
                         .HasForeignKey("ClassID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Server.Models.Person", "Person")
-                        .WithMany("ClassLists")
+                        .WithMany()
                         .HasForeignKey("PersonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -306,16 +190,6 @@ namespace Server.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Server.Models.Class", b =>
-                {
-                    b.Navigation("ClassLists");
-                });
-
-            modelBuilder.Entity("Server.Models.Person", b =>
-                {
-                    b.Navigation("ClassLists");
                 });
 #pragma warning restore 612, 618
         }

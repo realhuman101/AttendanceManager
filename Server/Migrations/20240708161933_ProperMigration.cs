@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ProperMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClassLists",
+                name: "ClassList",
                 columns: table => new
                 {
                     PersonID = table.Column<int>(type: "int", nullable: false),
@@ -54,15 +54,15 @@ namespace Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClassLists", x => new { x.PersonID, x.ClassID });
+                    table.PrimaryKey("PK_ClassList", x => new { x.PersonID, x.ClassID });
                     table.ForeignKey(
-                        name: "FK_ClassLists_Classes_ClassID",
+                        name: "FK_ClassList_Classes_ClassID",
                         column: x => x.ClassID,
                         principalTable: "Classes",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ClassLists_People_PersonID",
+                        name: "FK_ClassList_People_PersonID",
                         column: x => x.PersonID,
                         principalTable: "People",
                         principalColumn: "ID",
@@ -76,10 +76,7 @@ namespace Server.Migrations
                 {
                     { 1, new DateTime(2021, 9, 1, 10, 30, 0, 0, DateTimeKind.Unspecified), "Math 101", 30, "Room 101", new DateTime(2021, 9, 1, 9, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 2, new DateTime(2021, 9, 1, 12, 30, 0, 0, DateTimeKind.Unspecified), "History 101", 25, "Room 102", new DateTime(2021, 9, 1, 11, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2021, 9, 1, 14, 30, 0, 0, DateTimeKind.Unspecified), "Science 101", 20, "Room 103", new DateTime(2021, 9, 1, 13, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, new DateTime(2021, 9, 1, 16, 30, 0, 0, DateTimeKind.Unspecified), "English Literature", 22, "Room 104", new DateTime(2021, 9, 1, 15, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, new DateTime(2021, 9, 2, 10, 30, 0, 0, DateTimeKind.Unspecified), "Computer Science", 18, "Room 105", new DateTime(2021, 9, 2, 9, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, new DateTime(2021, 9, 2, 12, 30, 0, 0, DateTimeKind.Unspecified), "Philosophy", 15, "Room 106", new DateTime(2021, 9, 2, 11, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 3, new DateTime(2021, 9, 1, 14, 30, 0, 0, DateTimeKind.Unspecified), "Science 101", 20, "Room 103", new DateTime(2021, 9, 1, 13, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -89,39 +86,24 @@ namespace Server.Migrations
                 {
                     { 1, "john.doe@example.com", "John Doe", true },
                     { 2, "jane.smith@example.com", "Jane Smith", false },
-                    { 3, "alice.johnson@example.com", "Alice Johnson", true },
-                    { 4, "mark.brown@example.com", "Mark Brown", true },
-                    { 5, "lucy.green@example.com", "Lucy Green", true },
-                    { 6, "emma.white@example.com", "Emma White", false },
-                    { 7, "noah.wilson@example.com", "Noah Wilson", true },
-                    { 8, "liam.murphy@example.com", "Liam Murphy", true },
-                    { 9, "sophia.davis@example.com", "Sophia Davis", true },
-                    { 10, "ethan.miller@example.com", "Ethan Miller", false }
+                    { 3, "alice.johnson@example.com", "Alice Johnson", true }
                 });
 
             migrationBuilder.InsertData(
-                table: "ClassLists",
+                table: "ClassList",
                 columns: new[] { "ClassID", "PersonID" },
                 values: new object[,]
                 {
                     { 1, 1 },
                     { 2, 1 },
                     { 2, 2 },
-                    { 3, 3 },
-                    { 1, 4 },
-                    { 4, 5 },
-                    { 5, 5 },
-                    { 5, 6 },
-                    { 6, 7 },
-                    { 6, 8 },
-                    { 4, 9 },
-                    { 3, 10 },
-                    { 6, 10 }
+                    { 1, 3 },
+                    { 3, 3 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClassLists_ClassID",
-                table: "ClassLists",
+                name: "IX_ClassList_ClassID",
+                table: "ClassList",
                 column: "ClassID");
         }
 
@@ -129,7 +111,7 @@ namespace Server.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ClassLists");
+                name: "ClassList");
 
             migrationBuilder.DropTable(
                 name: "Classes");
