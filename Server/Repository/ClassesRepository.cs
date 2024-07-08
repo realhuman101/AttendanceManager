@@ -5,7 +5,7 @@ using Server.Models;
 
 namespace Server.Repository
 {
-    public class ClassesRepository : IRepository<Class>
+    public class ClassesRepository : IClassesRepository
     {
         private readonly DataContext dataContext;
 
@@ -24,13 +24,13 @@ namespace Server.Repository
             return dataContext.Classes.FirstOrDefault(c => c.ID == id);
         }
 
-        public List<IBaseObject> GetByJoint(int id)
+        public List<Person> GetByPerson(int id)
         {
-            List<IBaseObject> people = dataContext.ClassList
+            List<Person> people = dataContext.ClassList
                                                    .Where(cl => cl.ClassID == id)
                                                    .Include(cl => cl.Person)
                                                    .Select(cl => cl.Person)
-                                                   .ToList<IBaseObject>();
+                                                   .ToList();
 
             return people;
         }

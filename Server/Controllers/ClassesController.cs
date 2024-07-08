@@ -10,9 +10,9 @@ namespace Server.Controllers
     [ApiController]
     public class ClassesController : Controller
     {
-        private readonly IRepository<Class> _classesRepository;
+        private readonly IClassesRepository _classesRepository;
 
-        public ClassesController(IRepository<Class> classRepository)
+        public ClassesController(IClassesRepository classRepository)
         {
             _classesRepository = classRepository;
         }
@@ -29,6 +29,20 @@ namespace Server.Controllers
             }
 
             return Ok(classes);
+        }
+
+        [HttpGet("{id}/people")]
+        [ProducesResponseType(200)]
+        public IActionResult GetClassPeople(int id)
+        {
+            var _class = _classesRepository.GetByPerson(id);
+
+            if (_class == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_class);
         }
 
         [HttpGet("{id}")]

@@ -10,9 +10,9 @@ namespace Server.Controllers
     [ApiController]
     public class PeopleController : Controller
     {
-        private readonly IRepository<Person> _peopleRepository;
+        private readonly IPeopleRepository _peopleRepository;
 
-        public PeopleController(IRepository<Person> peopleRepository)
+        public PeopleController(IPeopleRepository peopleRepository)
         {
             _peopleRepository = peopleRepository;
         }
@@ -36,6 +36,20 @@ namespace Server.Controllers
         public IActionResult GetPerson(int id)
         {
             var person = _peopleRepository.GetByID(id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(person);
+        }
+
+        [HttpGet("{id}/classes")]
+        [ProducesResponseType(200)]
+        public IActionResult GetPersonClass(int id)
+        {
+            var person = _peopleRepository.GetByClasses(id);
 
             if (person == null)
             {

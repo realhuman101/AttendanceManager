@@ -22,8 +22,8 @@ namespace Server
                                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
                             });
 
-            builder.Services.AddScoped<IRepository<Person>, PeopleRepository>();
-            builder.Services.AddScoped<IRepository<Class>, ClassesRepository>();
+            builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
+            builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

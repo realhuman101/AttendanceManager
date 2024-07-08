@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Repository
 {
-    public class PeopleRepository : IRepository<Person>
+    public class PeopleRepository : IPeopleRepository
     {
         private readonly DataContext dataContext;
 
@@ -22,6 +22,17 @@ namespace Server.Repository
         public Person GetByID(int id)
         {
             return dataContext.People.FirstOrDefault(p => p.ID == id);
+        }
+
+        public List<Class> GetByClasses(int id)
+        {
+            List<Class> classes = dataContext.ClassList
+                                                   .Where(cl => cl.PersonID == id)
+                                                   .Include(cl => cl.Class)
+                                                   .Select(cl => cl.Class)
+                                                   .ToList();
+
+            return classes;
         }
 
         public bool Save()
