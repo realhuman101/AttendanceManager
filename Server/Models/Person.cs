@@ -5,8 +5,6 @@ namespace Server.Models
 {
     public class Person
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public string Name { get; set; }

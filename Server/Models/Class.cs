@@ -5,8 +5,6 @@ namespace Server.Models
 {
     public class Class
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public DateTime StartTime { get; set; }
