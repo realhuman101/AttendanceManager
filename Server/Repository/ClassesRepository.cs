@@ -24,6 +24,17 @@ namespace Server.Repository
             return dataContext.Classes.FirstOrDefault(c => c.ID == id);
         }
 
+        public List<IBaseObject> GetByJoint(int id)
+        {
+            List<IBaseObject> people = dataContext.ClassList
+                                                   .Where(cl => cl.ClassID == id)
+                                                   .Include(cl => cl.Person)
+                                                   .Select(cl => cl.Person)
+                                                   .ToList<IBaseObject>();
+
+            return people;
+        }
+
         public bool Save()
         {
             return dataContext.SaveChanges() >= 0; // Returns true if changes were saved

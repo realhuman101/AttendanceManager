@@ -4,7 +4,7 @@ namespace Server.Data
 {
     public static class Seed
     {
-        public static void SeedData(DataContext context)
+        public static List<ClassList> SeedData()
         {
             // Fake Classes
             var class1 = new Class { Name = "Math 101", Room = "Room 101", StartTime = DateTime.Parse("2021-09-01 09:00"), EndTime = DateTime.Parse("2021-09-01 10:30"), NoPeople = 30 };
@@ -24,8 +24,7 @@ namespace Server.Data
                 new ClassList() { Person = person3, Class = class3 }
             };
 
-            context.ClassList.AddRange(list.ToArray());
-            context.SaveChanges();
+            return list;
         }
     }
 }
