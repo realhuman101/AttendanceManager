@@ -29,8 +29,14 @@ namespace Server.Data
                 .UsingEntity<ClassList>();
 
             // Seed data
+            modelBuilder.Entity<Person>()
+                .HasData(Seed.Person());
+
+            modelBuilder.Entity<Class>()
+                .HasData(Seed.Class());
+
             modelBuilder.Entity<ClassList>()
-                .HasData(Seed.SeedData());
+                .HasData(Seed.ClassList());
         }
     }
 }
