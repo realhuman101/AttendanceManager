@@ -11,6 +11,6 @@ namespace Server.Models
         public bool Present { get; set; }
         public string Email { get; set; }
 
-        public virtual List<ClassList> ClassLists { get; set; }
+        public virtual List<Class> Classes { get; set; }
     }
 }

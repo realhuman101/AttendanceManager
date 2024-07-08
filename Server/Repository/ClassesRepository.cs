@@ -1,4 +1,5 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Interfaces;
 using Server.Models;
 

@@ -13,6 +13,6 @@ namespace Server.Models
         public string Room { get; set; }
         public int NoPeople { get; set; } // Number of people in the class
 
-        public virtual List<ClassList> ClassLists { get; set; }
+        public virtual List<Person> People { get; set; }
     }
 }

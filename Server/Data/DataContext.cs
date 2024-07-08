@@ -17,16 +17,16 @@ namespace Server.Data
             // Configure the join table
             modelBuilder.Entity<ClassList>()
                 .HasKey(cl => new { cl.PersonID, cl.ClassID });
-            
-            modelBuilder.Entity<ClassList>()
-                .HasOne(cl => cl.Person)
-                .WithMany(p => p.ClassLists)
-                .HasForeignKey(cl => cl.PersonID);
 
-            modelBuilder.Entity<ClassList>()
-                .HasOne(cl => cl.Class)
-                .WithMany(c => c.ClassLists)
-                .HasForeignKey(cl => cl.ClassID);
+            modelBuilder.Entity<Person>()
+                .HasMany(cl => cl.Classes)
+                .WithMany(p => p.People)
+                .UsingEntity<ClassList>();
+
+            modelBuilder.Entity<Class>()
+                .HasMany(cl => cl.People)
+                .WithMany(c => c.Classes)
+                .UsingEntity<ClassList>();
 
             // Seed data
 

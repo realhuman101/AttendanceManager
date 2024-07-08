@@ -6,10 +6,5 @@ namespace Server.Models
     {
         public int PersonID { get; set; }
         public int ClassID { get; set; }
-
-        [ForeignKey("PersonID")]
-        public Person Person { get; set; }
-        [ForeignKey("ClassID")]
-        public Class Class { get; set; }
     }
 }
