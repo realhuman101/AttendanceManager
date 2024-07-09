@@ -1,6 +1,5 @@
 ﻿using Server.Models;
 using Server.Models.JoinTables;
-using System.Runtime.CompilerServices;
 
 namespace Server.Data
 {

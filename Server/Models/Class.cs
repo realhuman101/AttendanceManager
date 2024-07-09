@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 using Server.Interfaces;
 
@@ -16,7 +15,7 @@ namespace Server.Models
         public string Room { get; set; } = null!;
         public int NoPeople { get; set; } // Number of people in the class
 
-        public virtual ICollection<Person> People { get; set; } = null!;
-        public virtual ICollection<Staff> Staffs { get; set; } = null!;
+        public virtual List<Person> People { get; set; } = null!;
+        public virtual List<Staff> Staffs { get; set; } = null!;
     }
 }

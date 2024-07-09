@@ -14,6 +14,6 @@ namespace Server.Models
         public bool Present { get; set; }
         public string Email { get; set; } = null!;
 
-        public virtual ICollection<Class> Classes { get; set; } = null!;
+        public virtual List<Class> Classes { get; set; } = null!;
     }
 }

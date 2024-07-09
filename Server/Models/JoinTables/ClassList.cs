@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Server.Models.JoinTables
+﻿namespace Server.Models.JoinTables
 {
     public class ClassList // Join table of Classes and People
     {
