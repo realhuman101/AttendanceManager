@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 using System.Web.Helpers;
 
 using Server.Interfaces;
@@ -32,7 +33,7 @@ namespace Server.Models
 
         public string generateSessionID()
         {
-            return Crypto.HashPassword(Password + DateTime.Now.ToString());
+            return Crypto.HashPassword(Password + DateTime.Now.ToString() + RandomNumberGenerator.GetInt32(100).ToString());
         }
     }
 }

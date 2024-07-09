@@ -37,7 +37,7 @@ namespace Server.Repository
             {
                 string sessIDVal = Crypto.HashPassword(email + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
                 Session session = new Session();
-                session.Value = sessIDVal;
+                session.Value = staff.generateSessionID();
                 session.staff = staff;
                 session.staffID = staff.ID;
                 session.Created = DateTime.Now;
