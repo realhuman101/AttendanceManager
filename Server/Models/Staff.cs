@@ -1,18 +1,9 @@
-﻿using System.Security.Cryptography;
-
-namespace Server.Models
+﻿namespace Server.Models
 {
     public class Staff : Person
     {
-        public string Salt { get; set; }
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
 
-        public Staff() 
-        {
-            byte[] buffer = new byte[1024];
-
-            RandomNumberGenerator.Create().GetBytes(buffer);
-            Salt = BitConverter.ToString(buffer);
-        }
+        public List<Session> Sessions { get; set; }
     }
 }

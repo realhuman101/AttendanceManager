@@ -45,6 +45,13 @@ namespace Server.Data
                 .WithMany(c => c.Classes)
                 .UsingEntity<StaffClass>();
 
+            // Configure the Staff-Session one-to-many relationship
+            modelBuilder.Entity<Staff>()
+                .HasMany(s => s.Sessions)
+                .WithOne(s => s.staff)
+                .HasForeignKey(s => s.staffID)
+                .IsRequired();
+
             // Seed data
             modelBuilder.Entity<Person>()
                 .HasData(Seed.Person());
