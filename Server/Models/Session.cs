@@ -12,6 +12,7 @@ namespace Server.Models
         public DateTime Created { get; set; }
 
         public int staffID { get; set; }
+        [ForeignKey("staffID")]
         public Staff staff { get; set; } = null!;
     }
 }
