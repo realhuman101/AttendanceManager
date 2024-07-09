@@ -1,4 +1,5 @@
-﻿using System.Web.Helpers;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Helpers;
 
 namespace Server.Models
 {
@@ -6,7 +7,9 @@ namespace Server.Models
     {
         private string Password;
 
-        public List<Session> Sessions { get; set; }
+        [InverseProperty("Staffs")]
+        public virtual List<Class> Classes { get; set; } = null!;
+        public virtual List<Session> Sessions { get; set; }
 
         public bool checkPassword(string attempt)
         {

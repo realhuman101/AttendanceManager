@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using Server.Interfaces;
 
 namespace Server.Models
@@ -15,7 +15,9 @@ namespace Server.Models
         public string Room { get; set; } = null!;
         public int NoPeople { get; set; } // Number of people in the class
 
+        [InverseProperty("Classes")]
         public virtual List<Person> People { get; set; } = null!;
+        [InverseProperty("Classes")]
         public virtual List<Staff> Staffs { get; set; } = null!;
     }
 }
