@@ -10,6 +10,8 @@ namespace Server.Interfaces
 
         public List<Class> GetClasses(int id);
 
+        public List<Person> GetByName(string name);
+
         public bool Save();
     }
 }

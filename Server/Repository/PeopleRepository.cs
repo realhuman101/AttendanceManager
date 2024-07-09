@@ -27,12 +27,17 @@ namespace Server.Repository
         public List<Class> GetClasses(int id)
         {
             List<Class> classes = dataContext.ClassList
-                                                   .Where(cl => cl.PersonID == id)
-                                                   .Include(cl => cl.Class)
-                                                   .Select(cl => cl.Class)
-                                                   .ToList();
+                                            .Where(cl => cl.PersonID == id)
+                                            .Include(cl => cl.Class)
+                                            .Select(cl => cl.Class)
+                                            .ToList();
 
             return classes;
+        }
+
+        public List<Person> GetByName(string name)
+        {
+            return dataContext.People.Where(p => p.Name == name).ToList();
         }
 
         public bool Save()

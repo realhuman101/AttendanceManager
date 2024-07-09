@@ -38,11 +38,21 @@ namespace Server.Controllers
             var person = _peopleRepository.GetByID(id);
 
             if (person == null)
-            {
                 return NotFound();
-            }
 
             return Ok(person);
+        }
+
+        [HttpGet("search/{name}")]
+        [ProducesResponseType(200, Type = typeof(List<PeopleRepository>))]
+        public IActionResult GetByName(string name)
+        {
+            List<Person>? people = _peopleRepository.GetByName(name);
+
+            if (people == null)
+                return NotFound();
+
+            return Ok(people);
         }
 
         [HttpGet("{id}/classes")]
