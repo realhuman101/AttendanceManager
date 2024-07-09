@@ -14,6 +14,7 @@ namespace Server.Data
         public DbSet<ClassList> ClassList => Set<ClassList>();
 
         public DbSet<Staff> Staffs => Set<Staff>();
+        public DbSet<StaffClass> StaffClass => Set<StaffClass>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

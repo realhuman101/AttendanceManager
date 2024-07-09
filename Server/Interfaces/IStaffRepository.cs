@@ -8,9 +8,9 @@ namespace Server.Interfaces
 
         public Staff GetByID(int id);
 
-        //public List<Class> GetClasses(int id);
-
         public string SignIn(string email, string attemptedPassword);
+
+        public Staff GetStaffSession(string sessionVal);
 
         public bool Save();
     }

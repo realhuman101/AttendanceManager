@@ -21,7 +21,7 @@ namespace Server.Controllers
         [ProducesResponseType(200, Type = typeof(List<StaffRepository>))]
         public IActionResult GetStaff()
         {
-            var staff = _staffRepository.Get();
+            List<Staff>? staff = _staffRepository.Get();
 
             if (!ModelState.IsValid)
             {
@@ -44,20 +44,6 @@ namespace Server.Controllers
 
             return Ok(staff);
         }
-
-        //[HttpGet("{id}/classes")]
-        //[ProducesResponseType(200)]
-        //public IActionResult GetPersonClass(int id)
-        //{
-        //    var person = _staffRepository.GetClasses(id);
-
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(person);
-        //}
 
         [HttpPost("{id}&{state}")]
         [ProducesResponseType(200)]
@@ -89,6 +75,20 @@ namespace Server.Controllers
             }
 
             return Unauthorized();
+        }
+
+        [HttpGet("StaffDetails/{sessionID}")]
+        [ProducesResponseType(200, Type=typeof(Staff))]
+        public IActionResult StaffDetails(string sessionID)
+        {
+            Staff? staff = _staffRepository.GetStaffSession(sessionID);
+
+            if (staff == null)
+                return NotFound();
+
+
+            
+            return Ok(staff);
         }
     }
 }

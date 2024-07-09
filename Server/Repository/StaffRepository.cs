@@ -41,9 +41,27 @@ namespace Server.Repository
                 session.Value = sessIDVal;
                 session.staff = staff;
                 session.staffID = staff.ID;
+                session.Created = DateTime.Now;
 
+                dataContext.Staffs.FirstOrDefault(p => p.Email == email).Sessions.Add(session);
                 Save();
                 return session.Value;
+            }
+
+            return null;
+        }
+
+        public Staff GetStaffSession(string sessionVal)
+        {            
+            foreach (Staff staff in dataContext.Staffs)
+            {
+                foreach (Session _session in staff.Sessions)
+                {
+                    if (_session.Value == sessionVal)
+                    {
+                        return staff;
+                    }
+                }
             }
 
             return null;
