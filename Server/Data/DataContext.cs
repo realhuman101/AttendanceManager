@@ -16,7 +16,7 @@ namespace Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure the join table
+            // Configure the Person-Class many-to-many relationship
             modelBuilder.Entity<ClassList>()
                 .HasKey(cl => new { cl.PersonID, cl.ClassID });
 
@@ -30,6 +30,12 @@ namespace Server.Data
                 .WithMany(p => p.Classes)
                 .UsingEntity<ClassList>();
 
+            // Configure the Staff-Class many-to-many relationship
+            modelBuilder.Entity<Staff>()
+                .HasMany(s => s.Classes)
+                .WithMany(c => c.Staffs)
+                .UsingEntity("StaffClassJT"); // JT stands for Join Table
+
             // Seed data
             modelBuilder.Entity<Person>()
                 .HasData(Seed.Person());
@@ -39,6 +45,9 @@ namespace Server.Data
 
             modelBuilder.Entity<ClassList>()
                 .HasData(Seed.ClassList());
+
+            modelBuilder.Entity<Staff>()
+                .HasData(Seed.Staff());
         }
     }
 }

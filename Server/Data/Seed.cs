@@ -44,5 +44,17 @@ namespace Server.Data
 
             return list;
         }
+
+        public static List<Staff> Staff()
+        {
+            List<Staff> staff = new List<Staff>()
+            {
+                new Staff { ID = 1, Name = "S John Doe", Email = "Sjohn.doe@example.com", Present = false, Password = "test123/" },
+                new Staff { ID = 2, Name = "S Jane Smith", Email = "Sjane.smith@example.com", Present = false, Password = "testingThis" },
+                new Staff { ID = 3, Name = "S Alice Johnson", Email = "Salice.johnson@example.com", Present = true, Password = "Password" }
+            };
+
+            return staff;
+        }
     }
 }
