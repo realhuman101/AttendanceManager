@@ -49,7 +49,7 @@ namespace Server.Controllers
         [ProducesResponseType(200)]
         public IActionResult GetPersonClass(int id)
         {
-            var person = _peopleRepository.GetByClasses(id);
+            var person = _peopleRepository.GetClasses(id);
 
             if (person == null)
             {

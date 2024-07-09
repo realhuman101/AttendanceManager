@@ -35,7 +35,7 @@ namespace Server.Controllers
         [ProducesResponseType(200)]
         public IActionResult GetClassPeople(int id)
         {
-            var _class = _classesRepository.GetByPerson(id);
+            var _class = _classesRepository.GetPeople(id);
 
             if (_class == null)
             {

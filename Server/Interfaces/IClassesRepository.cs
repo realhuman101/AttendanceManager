@@ -8,7 +8,7 @@ namespace Server.Interfaces
 
         public Class GetByID(int id);
 
-        public List<Person> GetByPerson(int id);
+        public List<Person> GetPeople(int id);
 
         public bool Save();
     }

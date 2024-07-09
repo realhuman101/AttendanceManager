@@ -24,7 +24,7 @@ namespace Server.Repository
             return dataContext.People.FirstOrDefault(p => p.ID == id);
         }
 
-        public List<Class> GetByClasses(int id)
+        public List<Class> GetClasses(int id)
         {
             List<Class> classes = dataContext.ClassList
                                                    .Where(cl => cl.PersonID == id)
