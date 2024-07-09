@@ -33,10 +33,9 @@ namespace Server.Repository
             if (staff == null)
                 return null;
 
-            string hashed = Crypto.HashPassword(attemptedPassword);
-            if (Crypto.VerifyHashedPassword(staff.Password, hashed))
+            if (staff.checkPassword(attemptedPassword))
             {
-                string sessIDVal = Crypto.HashPassword(hashed + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
+                string sessIDVal = Crypto.HashPassword(email + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
                 Session session = new Session();
                 session.Value = sessIDVal;
                 session.staff = staff;
