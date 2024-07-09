@@ -12,6 +12,8 @@ namespace Server.Data
         public DbSet<Person> People => Set<Person>();
         public DbSet<ClassList> ClassList => Set<ClassList>();
 
+        public DbSet<Staff> Staffs => Set<Staff>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure the join table
