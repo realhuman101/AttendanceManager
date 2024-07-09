@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Server.Models;
+using Server.Models.JoinTables;
 
 namespace Server.Data
 {
@@ -31,10 +32,18 @@ namespace Server.Data
                 .UsingEntity<ClassList>();
 
             // Configure the Staff-Class many-to-many relationship
+            modelBuilder.Entity<StaffClass>()
+                .HasKey(cl => new { cl.StaffID, cl.ClassID });
+
             modelBuilder.Entity<Staff>()
                 .HasMany(s => s.Classes)
                 .WithMany(c => c.Staffs)
-                .UsingEntity("StaffClassJT"); // JT stands for Join Table
+                .UsingEntity<StaffClass>();
+
+            modelBuilder.Entity<Class>()
+                .HasMany(s => s.Staffs)
+                .WithMany(c => c.Classes)
+                .UsingEntity<StaffClass>();
 
             // Seed data
             modelBuilder.Entity<Person>()
@@ -48,6 +57,9 @@ namespace Server.Data
 
             modelBuilder.Entity<Staff>()
                 .HasData(Seed.Staff());
+
+            modelBuilder.Entity<StaffClass>()
+                .HasData(Seed.StaffClass());
         }
     }
 }

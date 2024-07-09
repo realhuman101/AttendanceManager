@@ -1,4 +1,5 @@
 ﻿using Server.Models;
+using Server.Models.JoinTables;
 using System.Runtime.CompilerServices;
 
 namespace Server.Data
@@ -55,6 +56,23 @@ namespace Server.Data
             };
 
             return staff;
+        }
+
+        public static List<StaffClass> StaffClass()
+        {
+            List<Class> _class = Class();
+            List<Staff> staff = Staff();
+
+            List<StaffClass> list = new List<StaffClass>()
+            {
+                new StaffClass() { StaffID = staff[1-1].ID, ClassID = _class[1-1].ID },
+                new StaffClass() { StaffID = staff[1-1].ID, ClassID = _class[2-1].ID },
+                new StaffClass() { StaffID = staff[2-1].ID, ClassID = _class[2-1].ID },
+                new StaffClass() { StaffID = staff[3-1].ID, ClassID = _class[1-1].ID },
+                new StaffClass() { StaffID = staff[3-1].ID, ClassID = _class[3-1].ID }
+            };
+
+            return list;
         }
     }
 }
