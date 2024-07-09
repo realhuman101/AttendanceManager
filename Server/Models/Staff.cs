@@ -7,14 +7,16 @@ using Server.Interfaces;
 
 namespace Server.Models
 {
-    public class Staff : Person, IBaseObject
+    public class Staff : IBaseObject
     {
         [Key]
         public int ID { get; set; }
 
         private string Password;
+        public string Name { get; set; } = null!;
+        public bool Present { get; set; }
+        public string Email { get; set; } = null!;
 
-        [InverseProperty("Staffs")]
         public virtual List<Class> Classes { get; set; } = null!;
         [InverseProperty("staff")]
         public virtual List<Session> Sessions { get; set; }

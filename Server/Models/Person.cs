@@ -14,7 +14,6 @@ namespace Server.Models
         public bool Present { get; set; }
         public string Email { get; set; } = null!;
 
-        [InverseProperty("People")]
         public virtual List<Class> Classes { get; set; } = null!;
     }
 }

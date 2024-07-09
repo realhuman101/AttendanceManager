@@ -81,7 +81,7 @@ namespace Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Server.Models.ClassList", b =>
+            modelBuilder.Entity("Server.Models.JoinTables.ClassList", b =>
                 {
                     b.Property<int>("PersonID")
                         .HasColumnType("int");
@@ -119,6 +119,48 @@ namespace Server.Migrations
                         new
                         {
                             PersonID = 3,
+                            ClassID = 3
+                        });
+                });
+
+            modelBuilder.Entity("Server.Models.JoinTables.StaffClass", b =>
+                {
+                    b.Property<int>("StaffID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.HasKey("StaffID", "ClassID");
+
+                    b.HasIndex("ClassID");
+
+                    b.ToTable("StaffClass");
+
+                    b.HasData(
+                        new
+                        {
+                            StaffID = 1,
+                            ClassID = 1
+                        },
+                        new
+                        {
+                            StaffID = 1,
+                            ClassID = 2
+                        },
+                        new
+                        {
+                            StaffID = 2,
+                            ClassID = 2
+                        },
+                        new
+                        {
+                            StaffID = 3,
+                            ClassID = 1
+                        },
+                        new
+                        {
+                            StaffID = 3,
                             ClassID = 3
                         });
                 });
@@ -170,7 +212,79 @@ namespace Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Server.Models.ClassList", b =>
+            modelBuilder.Entity("Server.Models.Session", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("staffID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("staffID");
+
+                    b.ToTable("Session");
+                });
+
+            modelBuilder.Entity("Server.Models.Staff", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Present")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Staffs");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Email = "Sjohn.doe@example.com",
+                            Name = "S John Doe",
+                            Present = false
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Email = "Sjane.smith@example.com",
+                            Name = "S Jane Smith",
+                            Present = false
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Email = "Salice.johnson@example.com",
+                            Name = "S Alice Johnson",
+                            Present = true
+                        });
+                });
+
+            modelBuilder.Entity("Server.Models.JoinTables.ClassList", b =>
                 {
                     b.HasOne("Server.Models.Class", "Class")
                         .WithMany()
@@ -187,6 +301,41 @@ namespace Server.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Server.Models.JoinTables.StaffClass", b =>
+                {
+                    b.HasOne("Server.Models.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Staff");
+                });
+
+            modelBuilder.Entity("Server.Models.Session", b =>
+                {
+                    b.HasOne("Server.Models.Staff", "staff")
+                        .WithMany("Sessions")
+                        .HasForeignKey("staffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("staff");
+                });
+
+            modelBuilder.Entity("Server.Models.Staff", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

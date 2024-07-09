@@ -34,18 +34,6 @@ namespace Server.Data
                           .HasForeignKey(x => x.PersonID)
                 );
 
-            modelBuilder.Entity<Class>()
-                .HasMany(p => p.People)
-                .WithMany(p => p.Classes)
-                .UsingEntity<ClassList>(
-                    r => r.HasOne(x => x.Person)
-                          .WithMany()
-                          .HasForeignKey(x => x.PersonID),
-                    l => l.HasOne(x => x.Class)
-                          .WithMany()
-                          .HasForeignKey(x => x.ClassID)
-                );
-
             // Configure the Staff-Class many-to-many relationship
             modelBuilder.Entity<StaffClass>()
                 .HasKey(cl => new { cl.StaffID, cl.ClassID });
@@ -60,18 +48,6 @@ namespace Server.Data
                     l => l.HasOne(x => x.Staff)
                           .WithMany()
                           .HasForeignKey(x => x.StaffID)
-                );
-
-            modelBuilder.Entity<Class>()
-                .HasMany(s => s.Staffs)
-                .WithMany(c => c.Classes)
-                .UsingEntity<StaffClass>(
-                    r => r.HasOne(x => x.Staff)
-                          .WithMany()
-                          .HasForeignKey(x => x.StaffID),
-                    l => l.HasOne(x => x.Class)
-                          .WithMany()
-                          .HasForeignKey(x => x.ClassID)
                 );
 
             // Configure the Staff-Session one-to-many relationship

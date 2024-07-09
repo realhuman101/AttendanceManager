@@ -4,12 +4,12 @@ namespace Server.Models.JoinTables
 {
     public class StaffClass
     {
-        [ForeignKey("StaffID")]
         public Staff Staff { get; set; } = null!;
-        [ForeignKey("ClassID")]
         public Class Class { get; set; } = null!;
 
+        [ForeignKey("Staff")]
         public int StaffID { get; set; }
+        [ForeignKey("Class")]
         public int ClassID { get; set; }
     }
 }
