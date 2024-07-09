@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Web.Helpers;
+
 using Server.Data;
 using Server.Interfaces;
 using Server.Models;
@@ -31,7 +33,20 @@ namespace Server.Repository
             if (staff == null)
                 return null;
 
+            string hashed = Crypto.HashPassword(attemptedPassword);
+            if (Crypto.VerifyHashedPassword(staff.Password, hashed))
+            {
+                string sessIDVal = Crypto.HashPassword(hashed + DateTime.Now.ToString("MM/dd/yyyy h:mm tt"));
+                Session session = new Session();
+                session.Value = sessIDVal;
+                session.staff = staff;
+                session.staffID = staff.ID;
 
+                Save();
+                return session.Value;
+            }
+
+            return null;
         }
 
         public bool Save()
