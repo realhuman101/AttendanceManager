@@ -55,7 +55,7 @@ namespace Server.Data
             staff2.setPassword("Thingy3/");
             staff3.setPassword("Magic4");
 
-            List<Staff> staff = new List<Staff>();
+            List<Staff> staff = new List<Staff>() { staff1, staff2, staff3 };
 
             return staff;
         }
