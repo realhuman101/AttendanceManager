@@ -69,22 +69,28 @@ namespace Server.Controllers
             return Ok(person);
         }
 
-        [HttpPost("{id}&{state}")]
+        [HttpPost("{id}&{state}&{sessionID}")]
         [ProducesResponseType(200)]
-        public IActionResult UpdatePerson(int id, bool state)
+        public IActionResult UpdatePerson(int id, bool state, string sessionID)
         {
-            Person person = _peopleRepository.GetByID(id);
-
-            if (id != person.ID)
+            if (_peopleRepository.VerifySessionID(sessionID))
             {
-                return BadRequest();
+                Person person = _peopleRepository.GetByID(id);
+
+                if (id != person.ID)
+                {
+                    return BadRequest();
+                }
+
+                person.Present = state;
+
+                _peopleRepository.Save();
+
+                return NoContent();
+            } else
+            {
+                return Unauthorized();
             }
-
-            person.Present = state;
-
-            _peopleRepository.Save();
-
-            return NoContent();
         }
     }
 }

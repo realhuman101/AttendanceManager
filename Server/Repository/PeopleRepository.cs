@@ -40,6 +40,15 @@ namespace Server.Repository
             return dataContext.People.Where(p => p.Name == name).ToList();
         }
 
+        public bool VerifySessionID(string sessionID)
+        {
+            foreach (Staff staff in dataContext.Staffs)
+                foreach (Session session in staff.Sessions)
+                    if (sessionID == session.Value)
+                        return true;
+            return false;
+        }
+
         public bool Save()
         {
             return dataContext.SaveChanges() >= 0; // Returns true if changes were saved

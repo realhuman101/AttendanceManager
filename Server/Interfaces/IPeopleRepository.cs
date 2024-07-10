@@ -12,6 +12,8 @@ namespace Server.Interfaces
 
         public List<Person> GetByName(string name);
 
+        public bool VerifySessionID(string sessionID);
+
         public bool Save();
     }
 }
