@@ -182,7 +182,7 @@ namespace Server.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
 
                     b.HasData(
                         new
@@ -226,7 +226,7 @@ namespace Server.Migrations
 
                     b.HasIndex("ClassID");
 
-                    b.ToTable("ClassList");
+                    b.ToTable("ClassList", (string)null);
 
                     b.HasData(
                         new
@@ -277,7 +277,7 @@ namespace Server.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
 
                     b.HasData(
                         new

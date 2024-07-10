@@ -32,7 +32,8 @@ namespace Server
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAuthorization();
-            builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme)
+            builder.Services.AddAuthentication()
+                .AddCookie(IdentityConstants.ApplicationScheme)
                 .AddBearerToken(IdentityConstants.BearerScheme);
 
             builder.Services.AddDbContext<DataContext>(options =>
@@ -40,6 +41,7 @@ namespace Server
 
             builder.Services.AddIdentityCore<User>()
                 .AddEntityFrameworkStores<DataContext>()
+                .AddSignInManager()
                 .AddDefaultTokenProviders()
                 .AddApiEndpoints();
 
@@ -55,7 +57,10 @@ namespace Server
 
             app.UseHttpsRedirection();
 
-            //app.MapIdentityApi<User>;
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapIdentityApi<User>();
 
             app.MapControllers();
 
