@@ -24,7 +24,6 @@ namespace Server.Models
         public bool checkPassword(string attempt)
         {
             string hashed = Crypto.HashPassword(attempt);
-
             return Crypto.VerifyHashedPassword(hashed, Password);
         }
 
