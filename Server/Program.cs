@@ -14,7 +14,7 @@ namespace Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +46,7 @@ namespace Server
                     {
                         config.SignIn.RequireConfirmedEmail = false;
                     })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders()
                 .AddApiEndpoints();
@@ -81,6 +82,19 @@ namespace Server
                 ExcludegInfoGet = true,
                 ExcludeInfoPost = true,
             });
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roles = new[] { "Admin", "Manager", "Staff" };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
 
             app.Run();
         }
