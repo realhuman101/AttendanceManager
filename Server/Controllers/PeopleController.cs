@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 using Server.Interfaces;
 using Server.Models;
@@ -6,6 +7,7 @@ using Server.Repository;
 
 namespace Server.Controllers
 {
+    [Authorize]
     [Route("/api/[controller]")]
     [ApiController]
     public class PeopleController : Controller

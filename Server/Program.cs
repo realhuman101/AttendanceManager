@@ -8,6 +8,7 @@ using Server.Data;
 using Server.Repository;
 using Server.Interfaces;
 using Server.Overrides;
+using Server.Controllers;
 
 namespace Server
 {
@@ -23,7 +24,8 @@ namespace Server
                             .AddJsonOptions(options => {
                                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-                            });
+                            })
+                            .AddApplicationPart(typeof(ClassesController).Assembly);
 
             builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
             builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
@@ -40,14 +42,18 @@ namespace Server
             builder.Services.AddDbContext<DataContext>(options =>
                            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddIdentityCore<User>()
+            builder.Services.AddIdentityCore<User>(config =>
+                    {
+                        config.SignIn.RequireConfirmedEmail = false;
+                    })
                 .AddEntityFrameworkStores<DataContext>()
-                .AddSignInManager()
                 .AddDefaultTokenProviders()
                 .AddApiEndpoints();
 
             // Build App
             var app = builder.Build();
+
+            app.MapControllers();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
