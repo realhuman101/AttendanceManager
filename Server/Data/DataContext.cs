@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 using Server.Models;
 using Server.Models.JoinTables;
 
 namespace Server.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -13,11 +14,10 @@ namespace Server.Data
         public DbSet<Person> People => Set<Person>();
         public DbSet<ClassList> ClassList => Set<ClassList>();
 
-        public DbSet<Staff> Staffs => Set<Staff>();
-        public DbSet<StaffClass> StaffClass => Set<StaffClass>();
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             // Configure the Person-Class many-to-many relationship
             modelBuilder.Entity<ClassList>()
                 .HasKey(cl => new { cl.PersonID, cl.ClassID });

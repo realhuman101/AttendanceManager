@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 
 using Server.Models;
 using Server.Data;
@@ -29,8 +31,17 @@ namespace Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAuthorization();
+            builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme)
+                .AddBearerToken(IdentityConstants.BearerScheme);
+
             builder.Services.AddDbContext<DataContext>(options =>
                            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddIdentityCore<User>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders()
+                .AddApiEndpoints();
 
             // Build App
             var app = builder.Build();
@@ -44,8 +55,7 @@ namespace Server
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
+            //app.MapIdentityApi<User>;
 
             app.MapControllers();
 
