@@ -44,37 +44,5 @@ namespace Server.Data
 
             return list;
         }
-
-        public static List<Staff> Staff()
-        {
-            Staff staff1 = new Staff { ID = 1, Name = "S John Doe", Email = "Sjohn.doe@example.com", Present = false };
-            Staff staff2 = new Staff { ID = 2, Name = "S Jane Smith", Email = "Sjane.smith@example.com", Present = false };
-            Staff staff3 = new Staff { ID = 3, Name = "S Alice Johnson", Email = "Salice.johnson@example.com", Present = true };
-            
-            staff1.setPassword("Password123/");
-            staff2.setPassword("Thingy3/");
-            staff3.setPassword("Magic4");
-
-            List<Staff> staff = new List<Staff>() { staff1, staff2, staff3 };
-
-            return staff;
-        }
-
-        public static List<StaffClass> StaffClass()
-        {
-            List<Class> _class = Class();
-            List<Staff> staff = Staff();
-
-            List<StaffClass> list = new List<StaffClass>()
-            {
-                new StaffClass() { StaffID = staff[1-1].ID, ClassID = _class[1-1].ID },
-                new StaffClass() { StaffID = staff[1-1].ID, ClassID = _class[2-1].ID },
-                new StaffClass() { StaffID = staff[2-1].ID, ClassID = _class[2-1].ID },
-                new StaffClass() { StaffID = staff[3-1].ID, ClassID = _class[1-1].ID },
-                new StaffClass() { StaffID = staff[3-1].ID, ClassID = _class[3-1].ID }
-            };
-
-            return list;
-        }
     }
 }

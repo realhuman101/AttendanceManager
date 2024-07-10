@@ -24,7 +24,6 @@ namespace Server
 
             builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
             builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
-            builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

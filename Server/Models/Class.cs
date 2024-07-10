@@ -16,6 +16,5 @@ namespace Server.Models
         public int NoPeople { get; set; } // Number of people in the class
 
         public virtual List<Person> People { get; set; } = null!;
-        public virtual List<Staff> Staffs { get; set; } = null!;
     }
 }
