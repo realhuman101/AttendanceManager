@@ -7,6 +7,7 @@ using Server.Models;
 using Server.Data;
 using Server.Repository;
 using Server.Interfaces;
+using Server.Overrides;
 
 namespace Server
 {
@@ -60,7 +61,20 @@ namespace Server
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapIdentityApi<User>();
+            app.MapIdentityApiFilterable<User>(new IdentityApiEndpointRouteBuilderOptions()
+            {
+                ExcludeRegisterPost = false,
+                ExcludeLoginPost = true,
+                ExcludeRefreshPost = true,
+                ExcludeConfirmEmailGet = false,
+                ExcludeResendConfirmationEmailPost = false,
+                ExcludeForgotPasswordPost = true,
+                ExcludeResetPasswordPost = true,
+                ExcludeManageGroup = false,
+                Exclude2faPost = false,
+                ExcludegInfoGet = false,
+                ExcludeInfoPost = false,
+            });
 
             app.MapControllers();
 
