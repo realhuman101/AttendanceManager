@@ -12,7 +12,7 @@ namespace Server.Models
         [Key]
         public int ID { get; set; }
 
-        private string Password;
+        public string Password { get; private set; }
         public string Name { get; set; } = null!;
         public bool Present { get; set; }
         public string Email { get; set; } = null!;
