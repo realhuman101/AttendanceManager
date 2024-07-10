@@ -35,7 +35,7 @@ namespace Server
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAuthorization();
-            builder.Services.AddAuthentication()
+            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
                 .AddCookie(IdentityConstants.ApplicationScheme)
                 .AddBearerToken(IdentityConstants.BearerScheme);
 
