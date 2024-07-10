@@ -83,6 +83,7 @@ namespace Server
                 ExcludeInfoPost = true,
             });
 
+            // Seed roles
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -94,6 +95,12 @@ namespace Server
                     if (!await roleManager.RoleExistsAsync(role))
                         await roleManager.CreateAsync(new IdentityRole(role));
                 }
+
+                // Set up user
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+                var admin = await userManager.FindByEmailAsync("test@gmail.com");
+                await userManager.AddToRoleAsync(admin, "Admin");
             }
 
             app.Run();
