@@ -63,20 +63,18 @@ namespace Server
 
             app.MapIdentityApiFilterable<User>(new IdentityApiEndpointRouteBuilderOptions()
             {
-                ExcludeRegisterPost = false,
-                ExcludeLoginPost = true,
-                ExcludeRefreshPost = true,
-                ExcludeConfirmEmailGet = false,
-                ExcludeResendConfirmationEmailPost = false,
-                ExcludeForgotPasswordPost = true,
-                ExcludeResetPasswordPost = true,
-                ExcludeManageGroup = false,
-                Exclude2faPost = false,
-                ExcludegInfoGet = false,
-                ExcludeInfoPost = false,
+                ExcludeRegisterPost = true,
+                ExcludeLoginPost = false,
+                ExcludeRefreshPost = false,
+                ExcludeConfirmEmailGet = true,
+                ExcludeResendConfirmationEmailPost = true,
+                ExcludeForgotPasswordPost = false,
+                ExcludeResetPasswordPost = false,
+                ExcludeManageGroup = true,
+                Exclude2faPost = true,
+                ExcludegInfoGet = true,
+                ExcludeInfoPost = true,
             });
-
-            app.MapControllers();
 
             app.Run();
         }
