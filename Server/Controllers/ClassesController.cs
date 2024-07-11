@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 using Server.Interfaces;
 using Server.Models;
@@ -19,6 +20,7 @@ namespace Server.Controllers
             _classesRepository = classRepository;
         }
 
+        [OutputCache(Duration = 60)]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<ClassesRepository>))]
         public IActionResult GetClasses()

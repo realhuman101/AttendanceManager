@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.Caching.Memory;
 using Server.Data;
 using Server.Interfaces;
@@ -30,6 +31,7 @@ namespace Server.Controllers
             _cache = cache;
         }
 
+        [OutputCache(Duration = 60)]
         [HttpGet]
         public IActionResult GetAllUsers() 
         {

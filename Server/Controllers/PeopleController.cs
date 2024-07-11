@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.Caching.Memory;
 
 using Server.Interfaces;
@@ -22,6 +23,7 @@ namespace Server.Controllers
             _cache = cache;
         }
 
+        [OutputCache(Duration = 60)]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<PeopleRepository>))]
         public IActionResult GetPeople()
