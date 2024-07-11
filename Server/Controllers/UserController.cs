@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Caching.Memory;
 using Server.Data;
 using Server.Interfaces;
 using Server.Models;
@@ -15,21 +15,25 @@ namespace Server.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private readonly DataContext context;
-        private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly DataContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(DataContext dataContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IMemoryCache _cache;
+
+        public UserController(DataContext dataContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMemoryCache cache)
         {
-            context = dataContext;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
+            _context = dataContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
+
+            _cache = cache;
         }
 
         [HttpGet]
         public IActionResult GetAllUsers() 
         {
-            var users = context.Users.ToList();
+            var users = _context.Users.ToList();
 
             if (users == null) 
                 return NotFound();
@@ -40,41 +44,41 @@ namespace Server.Controllers
         [HttpPost("Modify/Roles/Add/{email}&{role}")]
         public async Task<IActionResult> AddUserRole(string email, string role)
         {
-            User? user = context.Users.FirstOrDefault(u => u.Email == email);
+            User? user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
                 return NotFound("User not found");
 
-            if (await userManager.IsInRoleAsync(user, role))
+            if (await _userManager.IsInRoleAsync(user, role))
                 return BadRequest("User has role");
 
             bool valid = false;
 
-            foreach (var sRole in context.Roles.ToList())
+            foreach (var sRole in _context.Roles.ToList())
                 if (sRole.Name == role)
                     valid = true;
 
             if (!valid)
                 return NotFound("Role not found");
 
-            await userManager.AddToRoleAsync(user, role);
+            await _userManager.AddToRoleAsync(user, role);
             return Ok();
         }
 
         [HttpPost("Modify/Roles/Remove/{email}&{role}")]
         public async Task<IActionResult> RmvUserRole(string email, string role)
         {
-            User? user = context.Users.FirstOrDefault(u => u.Email == email);
+            User? user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
                 return NotFound("User not found");
 
-            if (!await userManager.IsInRoleAsync(user, role))
+            if (!await _userManager.IsInRoleAsync(user, role))
                 return BadRequest("User does not have role");
 
             bool valid = false;
 
-            foreach (var sRole in context.Roles.ToList())
+            foreach (var sRole in _context.Roles.ToList())
                 if (sRole.Name == role)
                     valid = true;
 
@@ -82,19 +86,19 @@ namespace Server.Controllers
                 return NotFound("Role not found");
 
 
-            await userManager.RemoveFromRoleAsync(user, role);
+            await _userManager.RemoveFromRoleAsync(user, role);
             return Ok();
         }
 
         [HttpGet("Roles/{email}")]
         public IActionResult GetUserRoles(string email)
         {
-            User? user = context.Users.FirstOrDefault(u => u.Email == email);
+            User? user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
                 return NotFound("User not found");
 
-            var roles = context.Roles.ToList();
+            var roles = _context.Roles.ToList();
             return Ok(roles);
         }
 
@@ -102,7 +106,7 @@ namespace Server.Controllers
         [HttpGet("Current")]
         public async Task<IActionResult> GetCurrUser()
         {
-            var user = await userManager.GetUserAsync(this.User);
+            var user = await _userManager.GetUserAsync(this.User);
             if (user == null)
                 return NotFound("User not found");
 
