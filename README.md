@@ -1,13 +1,40 @@
-# Attendance Master
+# <div align="center">Attendance Manager</div>
 
-This is made with React.js as the frontend, with C# (ASP.NET) and MSSQL for the backend.
+***
 
-Frontend is stored in the `client` folder while the backend is stored in the `server` folder.
+## Table of Contents
 
-Add your MSSQL connection string in the [appsettings.json](/Server/appsettings.json) file by changing the `HIDDEN` text
+- [Attendance Manager](#attendance-manager)
+	- [Table of Contents](#table-of-contents)
+	- [Introduction](#introduction)
+	- [Usage](#usage)
+	- [Contributing](#contributing)
+	- [License](#license)
 
-If you want to use another RDBMS (instead of MSSQL) then install the [Entity Framework Core NuGet package](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli) for it, swap out all references to the MSSQL Entity Framework Core library with yours, and (hopefully) it should be compatable with the rest of the code :)
+## Introduction
 
-By the way, if you spot a security flaw, please create an issue ASAP and I'll get to it.
+Manage attendance at any event with this simple and easy-to-use application. This project is designed to help you keep track of who is present at your event, and who is not.
 
-*yes I regret using EF core*
+This project is built with React.JS ([Frontend](/Client)) and C# ([Backend](/Server)). I also used MSSQL, however you can use any RDBMS you want by installing the corresponding [Entity Framework Nuget package](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli).
+
+## Usage
+
+To use the project, you can:
+
+1. Install the repository
+2. Add your local connection string to the [appsettings.json](/Server/appsettings.json) file.
+3. Run the project!
+
+## Contributing
+
+If you want to contribute to this project, please follow the guidelines below:
+
+1. Fork the repository
+2. Create a new branch for your changes
+3. Make your changes and commit them
+4. Push the new branch to your fork
+5. Submit a pull request
+
+## License
+
+This project is licensed under the GNU General Public License. See our [LICENSE](LICENSE) for more information.
