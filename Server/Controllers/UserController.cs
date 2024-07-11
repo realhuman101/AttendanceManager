@@ -37,16 +37,16 @@ namespace Server.Controllers
             return Ok(users);
         }
 
-        [HttpPost("{email}/Add/{role}")]
+        [HttpPost("Modify/Roles/Add/{email}&{role}")]
         public async Task<IActionResult> AddUserRole(string email, string role)
         {
             User? user = context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
-                return NotFound();
+                return NotFound("User not found");
 
-            if (!await userManager.IsInRoleAsync(user, role))
-                return BadRequest();
+            if (await userManager.IsInRoleAsync(user, role))
+                return BadRequest("User has role");
 
             bool valid = false;
 
@@ -55,22 +55,22 @@ namespace Server.Controllers
                     valid = true;
 
             if (!valid)
-                return NotFound();
+                return NotFound("Role not found");
 
             await userManager.AddToRoleAsync(user, role);
             return Ok();
         }
 
-        [HttpPost("{email}/Remove/{role}")]
+        [HttpPost("Modify/Roles/Remove/{email}&{role}")]
         public async Task<IActionResult> RmvUserRole(string email, string role)
         {
             User? user = context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
-                return NotFound();
+                return NotFound("User not found");
 
             if (!await userManager.IsInRoleAsync(user, role))
-                return BadRequest();
+                return BadRequest("User does not have role");
 
             bool valid = false;
 
@@ -79,20 +79,32 @@ namespace Server.Controllers
                     valid = true;
 
             if (!valid)
-                return NotFound();
+                return NotFound("Role not found");
 
 
             await userManager.RemoveFromRoleAsync(user, role);
             return Ok();
         }
 
-        [Authorize]
+        [HttpGet("Roles/{email}")]
+        public IActionResult GetUserRoles(string email)
+        {
+            User? user = context.Users.FirstOrDefault(u => u.Email == email);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            var roles = context.Roles.ToList();
+            return Ok(roles);
+        }
+
+            [Authorize]
         [HttpGet("Current")]
         public async Task<IActionResult> GetCurrUser()
         {
             var user = await userManager.GetUserAsync(this.User);
             if (user == null)
-                return NotFound();
+                return NotFound("User not found");
 
             return Ok(user);
         }
