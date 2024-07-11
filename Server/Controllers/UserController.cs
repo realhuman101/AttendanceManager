@@ -85,5 +85,16 @@ namespace Server.Controllers
             await userManager.RemoveFromRoleAsync(user, role);
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet("Current")]
+        public async Task<IActionResult> GetCurrUser()
+        {
+            var user = await userManager.GetUserAsync(this.User);
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
     }
 }
