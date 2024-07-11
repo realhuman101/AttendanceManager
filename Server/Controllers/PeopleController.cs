@@ -7,7 +7,7 @@ using Server.Repository;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [Route("/api/[controller]")]
     [ApiController]
     public class PeopleController : Controller
@@ -71,6 +71,7 @@ namespace Server.Controllers
             return Ok(person);
         }
 
+        [Authorize]
         [HttpPost("{id}&{state}")]
         [ProducesResponseType(200)]
         public IActionResult UpdatePerson(int id, bool state, string sessionID)

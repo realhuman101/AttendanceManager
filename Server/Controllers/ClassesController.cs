@@ -7,7 +7,7 @@ using Server.Repository;
 
 namespace Server.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Manager")]
     [Route("/api/[controller]")]
     [ApiController]
     public class ClassesController : Controller

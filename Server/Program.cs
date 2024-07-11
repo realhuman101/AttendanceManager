@@ -42,7 +42,7 @@ namespace Server
             builder.Services.AddDbContext<DataContext>(options =>
                            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddIdentityCore<User>(config =>
+            builder.Services.AddIdentity<User, IdentityRole>(config =>
                     {
                         config.SignIn.RequireConfirmedEmail = false;
                     })
