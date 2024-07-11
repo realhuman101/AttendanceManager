@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 using Server.Interfaces;
 using Server.Models;
@@ -13,10 +14,12 @@ namespace Server.Controllers
     public class PeopleController : Controller
     {
         private readonly IPeopleRepository _peopleRepository;
+        private readonly IMemoryCache _cache;
 
-        public PeopleController(IPeopleRepository peopleRepository)
+        public PeopleController(IPeopleRepository peopleRepository, IMemoryCache cache)
         {
             _peopleRepository = peopleRepository;
+            _cache = cache;
         }
 
         [HttpGet]

@@ -102,7 +102,7 @@ namespace Server.Controllers
             return Ok(roles);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin,Manager")]
         [HttpGet("Roles/Current/")]
         public async Task<IActionResult> GetCurrUserRoles()
         {
