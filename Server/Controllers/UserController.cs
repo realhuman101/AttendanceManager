@@ -91,18 +91,31 @@ namespace Server.Controllers
         }
 
         [HttpGet("Roles/{email}")]
-        public IActionResult GetUserRoles(string email)
+        public async Task<IActionResult> GetUserRoles(string email)
         {
             User? user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if (user == null)
                 return NotFound("User not found");
 
-            var roles = _context.Roles.ToList();
+            var roles = await _userManager.GetRolesAsync(user);
             return Ok(roles);
         }
 
-            [Authorize]
+        [Authorize(Roles = "Admin, Manager")]
+        [HttpGet("Roles/Current/")]
+        public async Task<IActionResult> GetCurrUserRoles()
+        {
+            var user = await _userManager.GetUserAsync(this.User);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(roles);
+        }
+
+        [Authorize]
         [HttpGet("Current")]
         public async Task<IActionResult> GetCurrUser()
         {
