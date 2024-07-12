@@ -1,15 +1,16 @@
 import React from 'react'
 
 interface Props {
-	navItems: Array<string>
+	navItems: Array<string>;
+	navRedirect: Array<string>;
 }
 
-const Navbar = ({navItems} : Props) => {
+const Navbar = ({navItems, navRedirect} : Props) => {
 	return (
-		<nav>
+		<nav id="navbar">
 			<ul>
-				{navItems.map((item) => (
-					<li>{item}</li>
+				{navItems.map((item, index) => (
+					<li><a href={navRedirect[index]}>{item}</a></li>
 				))}
 			</ul>
 		</nav>
