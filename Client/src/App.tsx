@@ -7,7 +7,7 @@ import Login from './pages/Login';
 function App() {
   return (
     <>
-      <Navbar navItems={['Item']} navRedirect={['/']}/>
+      <Navbar navItems={['Home']} navRedirect={['/']}/>
 
       <BrowserRouter>
         <Routes>

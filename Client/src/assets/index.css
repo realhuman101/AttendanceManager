@@ -96,6 +96,16 @@ body {
   opacity: .7;
 }
 
+#login {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  margin-top: 25px;
+  padding: 10px;
+  background-color: rgb(224, 224, 255);
+  border-radius: 10px;
+}
+
 #login h1 {
   width: fit-content;
   text-align: center;
@@ -117,6 +127,15 @@ body {
 #login form label{
   margin-bottom: 0;
   margin-top: 10px;
+}
+
+#login form input[type=email],
+#login form input[type=password]{
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 250px;
+  margin-bottom: 10px;
 }
 
 #login form input[type=submit] {

@@ -1,10 +1,17 @@
-import React from 'react'
+import axios from "axios"
 
 const Login = () => {
+	const onSubmit = () => {
+		axios.post('/login', `{
+	'email': '',
+	'password': ''
+`)
+	}
+
   return (
 	<div id="login">
 		<h1>Log In</h1>
-		<form action="">
+		<form action="" onSubmit={onSubmit}>
 			<label htmlFor="email">Enter your email: </label>
 			<input type="email" name="email" id="email" placeholder="your@email.com" required />
 			
