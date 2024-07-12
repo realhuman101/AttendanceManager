@@ -56,6 +56,12 @@ namespace Server
                 .AddDefaultTokenProviders()
                 .AddApiEndpoints();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+            });
+
             // Build App
             var app = builder.Build();
 
