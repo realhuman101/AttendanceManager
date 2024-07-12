@@ -115,13 +115,6 @@ namespace Server
                     if (!await roleManager.RoleExistsAsync(role))
                         await roleManager.CreateAsync(new IdentityRole(role));
                 }
-
-                // Set up user
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-
-                var admin = await userManager.FindByEmailAsync("test@gmail.com");
-                if (!await userManager.IsInRoleAsync(admin, "Admin"))
-                    await userManager.AddToRoleAsync(admin, "Admin");
             }
         }
     }
