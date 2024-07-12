@@ -95,3 +95,45 @@ body {
   cursor: pointer;
   opacity: .7;
 }
+
+#login h1 {
+  width: fit-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+}
+
+#login form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#login form * {
+  margin: 3px;
+}
+
+#login form label{
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+#login form input[type=submit] {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 20px;
+  background-color: rgb(154, 154, 255);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: opacity 300ms ease-in-out;
+}
+
+#login form input[type=submit]:hover { 
+  opacity: .7;
+  cursor: pointer;
+}
