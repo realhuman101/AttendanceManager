@@ -15,7 +15,7 @@
 
 Manage attendance at any event with this simple and easy-to-use application. This project is designed to help you keep track of who is present at your event, and who is not.
 
-This project is built with React.JS ([Frontend](/Client)) and C# ([Backend](/Server)). I also used MSSQL, however you can use any RDBMS you want by installing the corresponding [Entity Framework Nuget package](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli).
+This project is built with React, Typescript and Tailwind CSS ([Frontend](/Client)) with C# ([Backend](/Server)). I also used MSSQL, however you can use any RDBMS you want by installing the corresponding [Entity Framework Nuget package](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli).
 
 ## Usage
 
