@@ -12,6 +12,11 @@ function App() {
   useEffect(() => {
     const response = API.Auth.refresh();
     console.log(response);
+
+    if (!loggedIn && location.href.split(location.host)[1] !== "/login")
+      window.location.href = '/login';
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

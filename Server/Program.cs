@@ -33,7 +33,8 @@ namespace Server
                         builder.WithOrigins("http://localhost:5173",
                             "http://localhost:7270")
                             .AllowAnyHeader()
-                            .AllowAnyMethod();
+                            .AllowAnyMethod()
+                            .AllowCredentials();
                     });
             });
 
@@ -79,8 +80,6 @@ namespace Server
             var app = builder.Build();
 
             app.UseCors("CorsPolicy");
-
-            app.MapControllers();
 
             IMemoryCache cache = app.Services.GetRequiredService<IMemoryCache>();
 

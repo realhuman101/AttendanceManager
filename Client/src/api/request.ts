@@ -4,11 +4,11 @@ const mainURL = data.url;
 
 export async function get(url: string) {
 	const response = await fetch(mainURL+url, {
-		credentials: 'same-origin',
+		credentials: 'include',
 		method: "GET",
 		headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Accept": "*/*"
+			"Accept": "*/*",
+			"Access-Control-Allow-Credentials": "true"
 		}
 	})
 	return await response.json();
@@ -16,12 +16,14 @@ export async function get(url: string) {
 
 export async function post(url: string, data = {}) {
 	const response = await fetch(mainURL+url, {
-		credentials: 'same-origin',
+		credentials: 'include',
+		mode: "cors",
 		method: "POST",
 		headers: {
 			'Host': "localhost:7270",
 			"Accept": "*/*",
-			"Content-Type": "application/json"
+			"Content-Type": "application/json",
+			"Access-Control-Allow-Credentials": "true"
 		},
 		body: JSON.stringify(data)
 	})
