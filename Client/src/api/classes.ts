@@ -1,16 +1,13 @@
-import axios from 'axios';
-import resolve from './resolve';
-import * as data from './config.json';
+import {get} from './request';
 
-const url = data.url;
 export async function allClasses() {
-	return await resolve(axios.get(url+'/api/Classes', { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get('/api/Classes');
 }
 
 export async function peopleInClass(id: number) {
-	return await resolve(axios.get(url+`/api/Classes/${id}/people`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get(`/api/Classes/${id}/people`);
 }
 
 export async function specificClass(id: number) {
-	return await resolve(axios.get(url+`/api/Classes/${id}`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get(`/api/Classes/${id}`);
 }

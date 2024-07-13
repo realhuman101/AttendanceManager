@@ -1,19 +1,12 @@
-import axios from 'axios';
-import resolve from './resolve';
-
-import * as data from './config.json';
-
-const url = data.url;
+import {post} from './request';
 
 export async function login(email: string, pass: string) {
-	return await resolve(axios.post(url+'/login?useCookies=true&useSessionCookies=true', { 
-		'Email': email, 
-		'Password': pass,
-		'TwoFactorCode': 'string',
-		'TwoFactorRecoveryCode': 'string'
-	}, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await post('/login', {
+		"Email": email,
+		"Password": pass
+	})
 }
 
 export async function refresh() {
-	return await resolve(axios.post(url+'/refresh', { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}))
+	return await post('/refresh')
 }

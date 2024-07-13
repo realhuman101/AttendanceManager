@@ -1,28 +1,25 @@
-import axios from 'axios';
-import resolve from './resolve';
-import * as data from './config.json';
+import {get, post} from './request';
 
-const url = data.url;
 export async function allUsers() {
-	return await resolve(axios.get(url+'/api/User', { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get('/api/User');
 }
 
 export async function addRole(email: string, role: string) {
-	return await resolve(axios.post(url+`/api/User/Modify/Roles/Add/${email}&${role}`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await post(`/api/User/Modify/Roles/Add/${email}&${role}`);
 }
 
 export async function removeRole(email: string, role: string) {
-	return await resolve(axios.post(url+`/api/User/Modify/Roles/Remove/${email}&${role}`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await post(`/api/User/Modify/Roles/Remove/${email}&${role}`);
 }
 
 export async function userRoles(email: string) {
-	return await resolve(axios.get(url+`/api/User/Roles/${email}`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get(`/api/User/Roles/${email}`);
 }
 
 export async function currUser() {
-	return await resolve(axios.get(url+`/api/User/Current`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get(`/api/User/Current`);
 }
 
 export async function currUserRoles() {
-	return await resolve(axios.get(url+`/api/User/Roles/Current`, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
+	return await get(`/api/User/Roles/Current`);
 }
