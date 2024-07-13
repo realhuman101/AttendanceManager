@@ -19,8 +19,9 @@ export async function post(url: string, data = {}) {
 		credentials: 'same-origin',
 		method: "POST",
 		headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Accept": "*/*"
+			'Host': "localhost:7270",
+			"Accept": "*/*",
+			"Content-Type": "application/json"
 		},
 		body: JSON.stringify(data)
 	})

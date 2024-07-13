@@ -26,13 +26,15 @@ namespace Server
 
             // Add services to the container.
 
-            builder.Services.AddCors(options => {
+            builder.Services.AddCors( options => { 
                 options.AddPolicy("CorsPolicy",
-                builder => builder
-                    .AllowAnyMethod()
-                    .AllowCredentials()
-                    .SetIsOriginAllowed((host) => true)
-                    .AllowAnyHeader());
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:5173",
+                            "http://localhost:7270")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
             });
 
             builder.Services.AddControllers()

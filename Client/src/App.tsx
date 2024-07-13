@@ -1,25 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
+import * as API from './api/index'
 import Navbar from './components/Navbar';
-import Alert from "./components/Alert";
 import Home from './pages/Home'
 import Login from './pages/Login';
-import { useState } from "react";
 
 function App() {
-  const [alertOpacity, setAlertOpacity] = useState(0)
-  const [alertType, setAlertType] = useState('primary')
+  const [loggedIn, setLogIn] = useState(false);
+
+  useEffect(() => {
+    const response = API.Auth.refresh();
+    console.log(response);
+  }, []);
 
   return (
     <>
       <Navbar navItems={['Home']} navRedirect={['/']}/>
 
-      <Alert styling={{opacity: alertOpacity}} type={alertType}>Text</Alert>
-
       <BrowserRouter>
         <Routes>
           <Route index element={<Home/>}/>
-          <Route path="/login" element={<Login alertOpacity={setAlertOpacity} alertType={setAlertType}/>}/>
+          <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>
         </Routes>
       </BrowserRouter>
     </>
