@@ -1,6 +1,6 @@
-import ReactDOM from 'react-dom/client'
 import { FormEvent, useState } from "react"
-import SweetAlert2 from "react-sweetalert2"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 import * as API from "../api/index"
 
@@ -12,8 +12,6 @@ const Login = ({onLogIn = () => {}} : Props) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const [alertProps, setAlertProps] = useState({});
-
 	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -22,31 +20,27 @@ const Login = ({onLogIn = () => {}} : Props) => {
 			const responseCode: number = response.status;
 
 			if (200 <= responseCode && responseCode < 300) { 
-				setAlertProps({
-					show: true,
+				withReactContent(Swal).fire({
 					title: "Successfully signed in!",
 					icon: "success"
 				});
 				onLogIn();
 			}
 			else if (responseCode == 401)
-				setAlertProps({
-					show: true,
+				withReactContent(Swal).fire({
 					title: "Failure...",
 					text: "Credentials do not match our records",
 					icon: "error"
 				});
 			else
-			setAlertProps({
-				show: true,
+			withReactContent(Swal).fire({
 				title: "Failure...",
 				text: "An error occurred... Please try again later!",
 				icon: "error"
 			});
 		}
 		else
-			setAlertProps({
-				show: true,
+			withReactContent(Swal).fire({
 				title: "Please fill in all fields",
 				icon: "error"
 			});
@@ -64,8 +58,6 @@ const Login = ({onLogIn = () => {}} : Props) => {
 
 				<input type="submit" value="Log In" />
 			</form>
-
-			<SweetAlert2 {...alertProps}/>
 		</div>
 	)
 }
