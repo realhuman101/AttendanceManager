@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Cors;
 
 using Server.Models;
 using Server.Data;
@@ -13,6 +14,7 @@ using Server.Interfaces;
 using Server.Overrides;
 using Server.Controllers;
 using System.Data;
+using Microsoft.Extensions.Options;
 
 namespace Server
 {
@@ -23,6 +25,15 @@ namespace Server
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                builder => builder
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyHeader());
+            });
 
             builder.Services.AddControllers()
                             .AddJsonOptions(options => {
@@ -65,9 +76,9 @@ namespace Server
             // Build App
             var app = builder.Build();
 
-            app.MapControllers();
+            app.UseCors("CorsPolicy");
 
-            app.UseCors();
+            app.MapControllers();
 
             IMemoryCache cache = app.Services.GetRequiredService<IMemoryCache>();
 
