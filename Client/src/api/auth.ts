@@ -11,9 +11,9 @@ export async function login(email: string, pass: string) {
 		'Password': pass,
 		'TwoFactorCode': 'string',
 		'TwoFactorRecoveryCode': 'string'
-	}, { withCredentials: true }).then(res => res.data));
+	}, { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}).then(res => res.data));
 }
 
 export async function refresh() {
-	return await resolve(axios.post(url+'/refresh'))
+	return await resolve(axios.post(url+'/refresh', { withCredentials: true, headers: {"Access-Control-Allow-Origin": "*"}}))
 }

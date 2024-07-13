@@ -67,6 +67,8 @@ namespace Server
 
             app.MapControllers();
 
+            app.UseCors();
+
             IMemoryCache cache = app.Services.GetRequiredService<IMemoryCache>();
 
             // Configure the HTTP request pipeline.

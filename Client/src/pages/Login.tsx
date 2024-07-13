@@ -1,14 +1,27 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import * as API from "../api/index"
 
-const Login = () => {
+interface Props {
+	alertOpacity: (opacity: number) => void,
+	alertType: (type: string) => void
+}
+
+const Login = ({alertOpacity, alertType} : Props) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const onSubmit = () => {
-		if (email.trim().length != 0 && password.length != 0)
-			API.Auth.login(email.trim(), password);
-		// else
+	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (email.trim().length != 0 && password.length != 0) {
+			const response = API.Auth.login(email.trim(), password);
+
+			console.log(response)
+		}
+		else {
+			alertType("danger")
+			alertOpacity(1)
+		}
 	}
 
 	return (
