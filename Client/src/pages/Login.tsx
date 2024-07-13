@@ -3,20 +3,23 @@ import * as API from "../api/index"
 
 interface Props {
 	alertOpacity: (opacity: number) => void,
-	alertType: (type: string) => void
+	alertType: (type: string) => void,
+	onLogIn: () => void
 }
 
-const Login = ({alertOpacity, alertType} : Props) => {
+const Login = ({alertOpacity, alertType, onLogIn = () => {}} : Props) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (email.trim().length != 0 && password.length != 0) {
-			const response = API.Auth.login(email.trim(), password);
+			const response = await API.Auth.login(email.trim(), password);
+			const responseCode: number = response.status;
 
-			console.log(response)
+			if (200 <= responseCode && responseCode < 300)
+				onLogIn();
 		}
 		else {
 			alertType("danger")

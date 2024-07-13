@@ -24,6 +24,7 @@ namespace Server.Controllers
         }
 
         [OutputCache(Duration = 60)]
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<PeopleRepository>))]
         public IActionResult GetPeople()
@@ -79,7 +80,7 @@ namespace Server.Controllers
         [Authorize]
         [HttpPost("{id}&{state}")]
         [ProducesResponseType(200)]
-        public IActionResult UpdatePerson(int id, bool state, string sessionID)
+        public IActionResult UpdatePerson(int id, bool state)
         {
             Person person = _peopleRepository.GetByID(id);
 
@@ -87,6 +88,9 @@ namespace Server.Controllers
             {
                 return BadRequest();
             }
+
+            if (person == null)
+                return NotFound();
 
             person.Present = state;
 

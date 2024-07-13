@@ -24,5 +24,5 @@ export async function post(url: string, data = {}) {
 		},
 		body: JSON.stringify(data)
 	})
-	return await response.json();
+	return await response;
 }
