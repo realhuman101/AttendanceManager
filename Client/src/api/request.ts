@@ -8,7 +8,8 @@ export async function get(url: string) {
 		method: "GET",
 		headers: {
 			"Accept": "*/*",
-			"Access-Control-Allow-Credentials": "true"
+			"Access-Control-Allow-Credentials": "true",
+			"Access-Control-Allow-Origin": mainURL
 		}
 	})
 	return await response.json();
@@ -23,7 +24,8 @@ export async function post(url: string, data = {}) {
 			'Host': "localhost:7270",
 			"Accept": "*/*",
 			"Content-Type": "application/json",
-			"Access-Control-Allow-Credentials": "true"
+			"Access-Control-Allow-Credentials": "true",
+			"Access-Control-Allow-Origin": mainURL
 		},
 		body: JSON.stringify(data)
 	})
