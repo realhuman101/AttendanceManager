@@ -43,7 +43,7 @@ namespace Server
                                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
                             })
-                            .AddApplicationPart(typeof(ClassesController).Assembly);
+                            .AddApplicationPart(typeof(UserController).Assembly);
 
             builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
             builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
@@ -79,8 +79,6 @@ namespace Server
             // Build App
             var app = builder.Build();
 
-            app.UseCors("CorsPolicy");
-
             IMemoryCache cache = app.Services.GetRequiredService<IMemoryCache>();
 
             // Configure the HTTP request pipeline.
@@ -94,6 +92,10 @@ namespace Server
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapIdentityApiFilterable<User>(new IdentityApiEndpointRouteBuilderOptions()
             {
@@ -111,6 +113,8 @@ namespace Server
             });
 
             seedRoles(app);
+
+            app.UseCors("CorsPolicy");
 
             app.Run();
         }

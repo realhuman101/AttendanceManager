@@ -10,7 +10,7 @@ function App() {
   const [loggedIn, setLogIn] = useState(false);
 
   useEffect(() => {
-    const response = API.Auth.refresh();
+    const response = API.Users.currUser();
     console.log(response);
 
     if (!loggedIn && location.href.split(location.host)[1] !== "/login")
