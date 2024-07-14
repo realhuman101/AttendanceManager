@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import * as API from '../api/index';
 
 interface Props {
 	navItems: Array<string>;
 	navRedirect: Array<string>;
+	loggedIn: boolean;
 }
 
-const Navbar = ({navItems, navRedirect} : Props) => {
-	const [loggedIn, setLogIn] = useState(false);
-
+const Navbar = ({navItems, navRedirect, loggedIn} : Props) => {
 	return (
 		<nav id="navbar">
 			<div id='navP1'>
@@ -20,7 +19,12 @@ const Navbar = ({navItems, navRedirect} : Props) => {
 			<div id='navP2'>
 					{!loggedIn ? <button type="button" onClick={() => {
 						window.location.href='/login'
-					}}>Log In</button> : <button type="button">Log Out</button>}
+					}}>Log In</button> 
+					
+					: <button type="button" onClick={() => {
+						API.Auth.logout()
+						window.location.href='/login'
+					}}>Log Out</button>}
 			</div>
 		</nav>
 	)

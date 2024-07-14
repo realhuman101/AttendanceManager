@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.Extensions.Caching.Memory;
+
 using Server.Data;
 using Server.Interfaces;
 using Server.Models;
+using System.Net;
 
 namespace Server.Controllers
 {
@@ -19,14 +22,16 @@ namespace Server.Controllers
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<User> _signInManager;
 
         private readonly IMemoryCache _cache;
 
-        public UserController(DataContext dataContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMemoryCache cache)
+        public UserController(DataContext dataContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IMemoryCache cache, SignInManager<User> signInManager)
         {
             _context = dataContext;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
 
             _cache = cache;
         }
@@ -126,6 +131,13 @@ namespace Server.Controllers
                 return NotFound("User not found");
 
             return Ok(user);
+        }
+
+        [Authorize]
+        [HttpPost("Current/LogOut")]
+        public async Task LogOut()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

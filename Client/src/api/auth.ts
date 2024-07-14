@@ -14,6 +14,10 @@ export async function refresh() {
 	return await post('/refresh')
 }
 
+export async function logout() {
+	return await post('/api/Users/Current/LogOut')
+}
+
 export async function checkLogIn() : Promise<boolean | null> {
 	const user = await currUser();
 	

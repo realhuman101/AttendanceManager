@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <Navbar navItems={['Home']} navRedirect={['/']}/>
+      <Navbar navItems={['Home']} navRedirect={['/']} loggedIn={loggedIn}/>
 
       <BrowserRouter>
         <Routes>
