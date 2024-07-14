@@ -10,11 +10,24 @@ function App() {
   const [loggedIn, setLogIn] = useState(false);
 
   useEffect(() => {
-    const response = API.Users.currUser();
-    console.log(response);
+    async function logInCheck() {
+      const logIn = await API.Auth.checkLogIn();
 
-    if (!loggedIn && location.href.split(location.host)[1] !== "/login")
-      window.location.href = '/login';
+      if (logIn == null) {
+        console.log("ERROR")
+        return
+      }
+
+      setLogIn(logIn);
+
+      if (!logIn && location.href.split(location.host)[1] !== "/login")
+        window.location.href = '/login';
+
+      else if (logIn && location.href.split(location.host)[1] === "/login")
+        window.location.href = '/';
+    }
+
+    logInCheck();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -25,8 +38,8 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home/>}/>
-          <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>
+          {loggedIn && <Route index element={<Home/>}/>}
+          {!loggedIn && <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>}
         </Routes>
       </BrowserRouter>
     </>

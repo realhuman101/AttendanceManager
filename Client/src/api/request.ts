@@ -2,17 +2,21 @@ import * as data from './config.json';
 
 const mainURL = data.url;
 
+const defaultHeaders = {
+	'Host': "localhost:7270",
+	"Accept": "*/*",
+	"Content-Type": "application/json",
+	"Access-Control-Allow-Credentials": "true",
+	"Access-Control-Allow-Origin": mainURL
+}
+
 export async function get(url: string) {
 	const response = await fetch(mainURL+url, {
 		credentials: 'include',
 		method: "GET",
-		headers: {
-			"Accept": "*/*",
-			"Access-Control-Allow-Credentials": "true",
-			"Access-Control-Allow-Origin": mainURL
-		}
+		headers: defaultHeaders
 	})
-	return await response.json();
+	return await response;
 }
 
 export async function post(url: string, data = {}) {
@@ -20,13 +24,7 @@ export async function post(url: string, data = {}) {
 		credentials: 'include',
 		mode: "cors",
 		method: "POST",
-		headers: {
-			'Host': "localhost:7270",
-			"Accept": "*/*",
-			"Content-Type": "application/json",
-			"Access-Control-Allow-Credentials": "true",
-			"Access-Control-Allow-Origin": mainURL
-		},
+		headers: defaultHeaders,
 		body: JSON.stringify(data)
 	})
 	return await response;

@@ -24,6 +24,9 @@ const Login = ({onLogIn = () => {}} : Props) => {
 					title: "Successfully signed in!",
 					icon: "success"
 				});
+
+				window.location.href = '/';
+
 				onLogIn();
 			}
 			else if (responseCode == 401)
