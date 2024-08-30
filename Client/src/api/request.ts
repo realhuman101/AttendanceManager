@@ -21,7 +21,6 @@ export async function get(url: string) {
 
 export async function post(url: string, data = {}) {
 	const response = await fetch(mainURL+url, {
-		credentials: 'include',
 		mode: "cors",
 		method: "POST",
 		headers: defaultHeaders,
