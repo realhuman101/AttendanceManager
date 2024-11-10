@@ -18,10 +18,6 @@ Manage attendance at any event with this simple and easy-to-use application. Thi
 
 This project is built with React, Typescript and Tailwind CSS ([Frontend](/Client)) with C# ([Backend](/Server)). I also used MSSQL, however you can use any RDBMS you want by installing the corresponding [Entity Framework Nuget package](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli).
 
-## Images
-
-![Log-in Page](Client/assets/img.png)
-
 ## Usage
 
 To use the project, you can:
