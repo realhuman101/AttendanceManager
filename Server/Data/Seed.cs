@@ -5,7 +5,7 @@ namespace Server.Data
 {
     public static class Seed
     {
-        public static List<Class> Class()
+        public static List<Class> Classes()
         {
             List<Class> classes = new List<Class>() 
             {
@@ -17,13 +17,13 @@ namespace Server.Data
             return classes;
         }
 
-        public static List<Person> Person()
+        public static List<Person> Persons()
         {
             List<Person> people = new List<Person>()
             {
-                new Person { ID = 1, Name = "John Doe", Email = "john.doe@example.com", Present = true },
-                new Person { ID = 2, Name = "Jane Smith", Email = "jane.smith@example.com", Present = false },
-                new Person { ID = 3, Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true }
+                new Person { ID = 1, Name = "John Doe", Email = "john.doe@example.com", Present = true, Role = Person.Purpose.presenter },
+                new Person { ID = 2, Name = "Jane Smith", Email = "jane.smith@example.com", Present = false, Role = Person.Purpose.participant },
+                new Person { ID = 3, Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true, Role = Person.Purpose.competitor }
             };
 
             return people;
@@ -31,8 +31,8 @@ namespace Server.Data
 
         public static List<ClassList> ClassList()
         {
-            List<Class> _class = Class();
-            List<Person> person = Person();
+            List<Class> _class = Classes();
+            List<Person> person = Persons();
 
             List<ClassList> list = new List<ClassList>() { 
                 new ClassList() { PersonID = person[1-1].ID, ClassID = _class[1-1].ID },

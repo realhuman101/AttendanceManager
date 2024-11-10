@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import * as API from './api/index'
@@ -38,7 +38,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          {loggedIn && <Route index element={<Home/>}/>}
+          {loggedIn ? <Route index element={<Home/>}/> : <Route index element={<Navigate to="login" replace />} />}
           {!loggedIn && <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>}
         </Routes>
       </BrowserRouter>

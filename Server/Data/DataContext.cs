@@ -36,10 +36,10 @@ namespace Server.Data
 
             // Seed data
             modelBuilder.Entity<Person>()
-                .HasData(Seed.Person());
+                .HasData(Seed.Persons());
 
             modelBuilder.Entity<Class>()
-                .HasData(Seed.Class());
+                .HasData(Seed.Classes());
 
             modelBuilder.Entity<ClassList>()
                 .HasData(Seed.ClassList());
