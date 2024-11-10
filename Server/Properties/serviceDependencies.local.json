@@ -8,8 +8,10 @@
       "dynamicId": null
     },
     "secrets1": {
+      "secretStore": null,
+      "resourceId": null,
       "type": "secrets.user",
-      "dynamicId": null
+      "connectionId": null
     }
   }
 }
