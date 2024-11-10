@@ -8,6 +8,10 @@ export async function personClass(id: number) {
 	return await get(`/api/People/${id}/classes`);
 }
 
+export async function personRole(id: number) {
+	return await get(`/api/People/${id}/role`);
+}
+
 export async function specificPerson(id: number) {
 	return await get(`/api/People/${id}`);
 }
