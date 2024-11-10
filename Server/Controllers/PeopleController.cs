@@ -9,7 +9,7 @@ using Server.Repository;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize]
     [Route("/api/[controller]")]
     [ApiController]
     public class PeopleController : Controller
@@ -77,7 +77,23 @@ namespace Server.Controllers
             return Ok(person);
         }
 
-        [Authorize]
+        [HttpGet("{id}/role")]
+        [ProducesResponseType(200)]
+        public IActionResult GetPersonRole(int id)
+        {
+            var person = _peopleRepository.GetByID(id);
+
+            if (id != person.ID)
+            {
+                return BadRequest();
+            }
+
+            if (person == null)
+                return NotFound();
+
+            return Ok(person.Role);
+        }
+
         [HttpPost("{id}&{state}")]
         [ProducesResponseType(200)]
         public IActionResult UpdatePerson(int id, bool state)
