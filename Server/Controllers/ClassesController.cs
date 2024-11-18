@@ -37,7 +37,7 @@ namespace Server.Controllers
 
         [HttpGet("{id}/people")]
         [ProducesResponseType(200)]
-        public IActionResult GetClassPeople(int id)
+        public IActionResult GetClassPeople(string id)
         {
             var _class = _classesRepository.GetPeople(id);
 
@@ -51,7 +51,7 @@ namespace Server.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(ClassesRepository))]
-        public IActionResult GetClass(int id)
+        public IActionResult GetClass(string id)
         {
             var _class = _classesRepository.GetByID(id);
 

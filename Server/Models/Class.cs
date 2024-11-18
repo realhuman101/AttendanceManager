@@ -7,7 +7,7 @@ namespace Server.Models
     public class Class : IBaseObject
     {
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

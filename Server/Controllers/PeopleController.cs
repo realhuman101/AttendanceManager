@@ -41,7 +41,7 @@ namespace Server.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(PeopleRepository))]
-        public IActionResult GetPerson(int id)
+        public IActionResult GetPerson(string id)
         {
             var person = _peopleRepository.GetByID(id);
 
@@ -65,7 +65,7 @@ namespace Server.Controllers
 
         [HttpGet("{id}/classes")]
         [ProducesResponseType(200)]
-        public IActionResult GetPersonClass(int id)
+        public IActionResult GetPersonClass(string id)
         {
             var person = _peopleRepository.GetClasses(id);
 
@@ -79,7 +79,7 @@ namespace Server.Controllers
 
         [HttpGet("{id}/role")]
         [ProducesResponseType(200)]
-        public IActionResult GetPersonRole(int id)
+        public IActionResult GetPersonRole(string id)
         {
             var person = _peopleRepository.GetByID(id);
 
@@ -96,7 +96,7 @@ namespace Server.Controllers
 
         [HttpPost("{id}&{state}")]
         [ProducesResponseType(200)]
-        public IActionResult UpdatePerson(int id, bool state)
+        public IActionResult UpdatePerson(string id, bool state)
         {
             Person person = _peopleRepository.GetByID(id);
 

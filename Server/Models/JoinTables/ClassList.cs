@@ -8,8 +8,8 @@ namespace Server.Models.JoinTables
         public Class Class { get; set; } = null!;
 
         [ForeignKey("Person")]
-        public int PersonID { get; set; }
+        public string PersonID { get; set; }
         [ForeignKey("Class")]
-        public int ClassID { get; set; }
+        public string ClassID { get; set; }
     }
 }

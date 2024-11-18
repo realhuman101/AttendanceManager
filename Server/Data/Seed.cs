@@ -9,9 +9,9 @@ namespace Server.Data
         {
             List<Class> classes = new List<Class>() 
             {
-                new Class { ID = 1, Name = "Math 101", Room = "Room 101", StartTime = DateTime.Parse("2021-09-01 09:00"), EndTime = DateTime.Parse("2021-09-01 10:30"), NoPeople = 30 },
-                new Class { ID = 2, Name = "History 101", Room = "Room 102", StartTime = DateTime.Parse("2021-09-01 11:00"), EndTime = DateTime.Parse("2021-09-01 12:30"), NoPeople = 25 },
-                new Class { ID = 3, Name = "Science 101", Room = "Room 103", StartTime = DateTime.Parse("2021-09-01 13:00"), EndTime = DateTime.Parse("2021-09-01 14:30"), NoPeople = 20 }
+                new Class { ID = "1", Name = "Math 101", Room = "Room 101", StartTime = DateTime.Parse("2021-09-01 09:00"), EndTime = DateTime.Parse("2021-09-01 10:30"), NoPeople = 30 },
+                new Class { ID = "2", Name = "History 101", Room = "Room 102", StartTime = DateTime.Parse("2021-09-01 11:00"), EndTime = DateTime.Parse("2021-09-01 12:30"), NoPeople = 25 },
+                new Class { ID = "3", Name = "Science 101", Room = "Room 103", StartTime = DateTime.Parse("2021-09-01 13:00"), EndTime = DateTime.Parse("2021-09-01 14:30"), NoPeople = 20 }
             };
 
             return classes;
@@ -21,9 +21,9 @@ namespace Server.Data
         {
             List<Person> people = new List<Person>()
             {
-                new Person { ID = 1, Name = "John Doe", Email = "john.doe@example.com", Present = true, Role = Person.Purpose.presenter },
-                new Person { ID = 2, Name = "Jane Smith", Email = "jane.smith@example.com", Present = false, Role = Person.Purpose.participant },
-                new Person { ID = 3, Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true, Role = Person.Purpose.competitor }
+                new Person { ID = "1", Name = "John Doe", Email = "john.doe@example.com", Present = true, Role = Person.Purpose.presenter },
+                new Person { ID = "2", Name = "Jane Smith", Email = "jane.smith@example.com", Present = false, Role = Person.Purpose.participant },
+                new Person { ID = "3", Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true, Role = Person.Purpose.competitor }
             };
 
             return people;

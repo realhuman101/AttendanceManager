@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import * as API from './api/index'
 import Navbar from './components/Navbar';
-import Home from './pages/Home'
+import Home from "./pages/Home";
+import StaffHome from './pages/StaffHome'
 import Login from './pages/Login';
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          {loggedIn ? <Route index element={<Home/>}/> : <Route index element={<Navigate to="login" replace />} />}
+          {loggedIn ? <Route index element={<StaffHome/>}/> : <Route index element={<Home/>} />}
           {!loggedIn && <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>}
         </Routes>
       </BrowserRouter>

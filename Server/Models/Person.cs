@@ -15,11 +15,12 @@ namespace Server.Models
         }
 
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public string Name { get; set; } = null!;
         public bool Present { get; set; }
         public string Email { get; set; } = null!;
+        public string EmergencyContact { get; set; } = null!;
 
         public Purpose Role { get; set; }
 
