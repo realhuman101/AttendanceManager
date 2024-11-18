@@ -191,7 +191,7 @@ button:hover {
   cursor: pointer;
 }
 
-#homepage {
+.page {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -200,7 +200,7 @@ button:hover {
   height: calc(100dvh - 50px);
 }
 
-#homepage div {
+.page div {
   display: flex;
   flex-direction: column;
   justify-content: center;

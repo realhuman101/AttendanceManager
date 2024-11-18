@@ -1,9 +1,9 @@
 function Home() {
   return (
-	<div id="homepage">
+	<div className="page">
 		<div>
 			<h1>Welcome!</h1>
-			<button>Scan QR Code</button>
+			<button onClick={() => {window.location.href='/scan'}}>Scan QR Code</button>
 		</div>
 	</div>
   )

@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from "./pages/Home";
 import StaffHome from './pages/StaffHome'
 import Login from './pages/Login';
+import Scan from "./pages/Scan";
 
 function App() {
   const [loggedIn, setLogIn] = useState(false);
@@ -41,6 +42,8 @@ function App() {
         <Routes>
           {loggedIn ? <Route index element={<StaffHome/>}/> : <Route index element={<Home/>} />}
           {!loggedIn && <Route path="/login" element={<Login onLogIn={() => {setLogIn(true)}}/>}/>}
+        
+          <Route path="/scan" element={<Scan/>}/>
         </Routes>
       </BrowserRouter>
     </>
