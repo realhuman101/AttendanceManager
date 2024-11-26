@@ -1,16 +1,19 @@
 import { useState } from "react";
+//@ts-expect-error idgaf
 import QrScanner from "react-qr-scanner";
 
 function Scan() {
   const [data, setData] = useState("No result");
 
-  const handleScan = (result: string | null) => {
+  //@ts-expect-error idgaf
+  const handleScan = (result) => {
     if (result) {
       setData(result);
     }
   };
 
-  const handleError = (error: any) => {
+  //@ts-expect-error idgaf
+  const handleError = (error) => {
     console.error("Error scanning QR code:", error);
   };
 
@@ -51,7 +54,7 @@ function Scan() {
             reader.onload = (event) => {
               const image = event.target?.result;
               if (image) {
-                (document.querySelector("canvas") as HTMLCanvasElement).style.backgroundImage = `url(${image})`;
+                (document.querySelector("canvas") as HTMLElement).style.backgroundImage = `url(${image})`;
               }
             };
             reader.readAsDataURL(file);

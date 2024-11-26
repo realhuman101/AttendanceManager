@@ -6,6 +6,9 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Options;
+using Npgsql;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 using Server.Models;
 using Server.Data;
@@ -14,7 +17,6 @@ using Server.Interfaces;
 using Server.Overrides;
 using Server.Controllers;
 using System.Data;
-using Microsoft.Extensions.Options;
 
 namespace Server
 {
@@ -59,7 +61,7 @@ namespace Server
             builder.Services.AddAuthorization();
 
             builder.Services.AddDbContext<DataContext>(options =>
-                           options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                           options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddIdentity<User, IdentityRole>(config =>
                     {

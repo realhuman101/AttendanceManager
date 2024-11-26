@@ -19,12 +19,12 @@ namespace Server.Repository
             return dataContext.People.ToList();
         }
 
-        public Person GetByID(int id)
+        public Person GetByID(string id)
         {
             return dataContext.People.FirstOrDefault(p => p.ID == id);
         }
 
-        public List<Class> GetClasses(int id)
+        public List<Class> GetClasses(string id)
         {
             List<Class> classes = dataContext.ClassList
                                             .Where(cl => cl.PersonID == id)
