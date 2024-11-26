@@ -21,9 +21,9 @@ namespace Server.Data
         {
             List<Person> people = new List<Person>()
             {
-                new Person { ID = "1", Name = "John Doe", Email = "john.doe@example.com", Present = true, Role = Person.Purpose.presenter },
-                new Person { ID = "2", Name = "Jane Smith", Email = "jane.smith@example.com", Present = false, Role = Person.Purpose.participant },
-                new Person { ID = "3", Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true, Role = Person.Purpose.competitor }
+                new Person { ID = "1", Name = "John Doe", Email = "john.doe@example.com", Present = true, Role = Person.Purpose.presenter, EmergencyContact = "me"},
+                new Person { ID = "2", Name = "Jane Smith", Email = "jane.smith@example.com", Present = false, Role = Person.Purpose.participant, EmergencyContact = "me" },
+                new Person { ID = "3", Name = "Alice Johnson", Email = "alice.johnson@example.com", Present = true, Role = Person.Purpose.competitor, EmergencyContact = "me" }
             };
 
             return people;
