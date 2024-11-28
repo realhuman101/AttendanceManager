@@ -7,9 +7,11 @@ function Scan() {
 
   //@ts-expect-error idgaf
   const handleScan = (result) => {
+    console.log(result)
     if (result) {
       setData(result);
     }
+    setData(result)
   };
 
   //@ts-expect-error idgaf
@@ -25,10 +27,10 @@ function Scan() {
     <div className="page" style={{ width: "100%", height: "100vh" }}>
       <h1>Scan</h1>
       <QrScanner
-        delay={300}
+        delay={100}
         onError={handleError}
         onScan={handleScan}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "250px", height: "250px" }}
         legacyMode={true} 
       />
       <button

@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/runtime": "^7.26.0",
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "http-proxy-middleware": "^3.0.3",
