@@ -8,9 +8,13 @@ function Scan() {
 
   //@ts-expect-error idgaf
   const handleScan = (result) => {
-    if (result) {
-      console.log(result);
-      setData(result);
+    try {
+      if (result) {
+        console.log(result);
+        setData(result);
+      }
+    } catch {
+      console.log('stfu2')
     }
   };
 
