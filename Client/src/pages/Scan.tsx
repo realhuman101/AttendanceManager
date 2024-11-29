@@ -1,53 +1,43 @@
-import { useRef, useState } from "react";
-//@ts-expect-error idgaf
-import QrReader from "react-qr-scanner";
+import { useState } from "react";
+import jsQR from "jsqr";
 
 function Scan() {
   const [data, setData] = useState("No result");
-  const qrReader = useRef(null);
 
-  //@ts-expect-error idgaf
-  const handleScan = (result) => {
-    try {
-      if (result) {
-        console.log(result);
-        setData(result);
-      }
-    } catch {
-      console.log('stfu2')
+  //@ts-expect-error stfu
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        //@ts-expect-error stfu
+        img.src = e.target.result as string;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
+          //@ts-expect-error stfu
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+          //@ts-expect-error stfu
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height);
+          if (code) {
+            setData(code.data);
+          } else {
+            setData("No QR code found.");
+          }
+        };
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  //@ts-expect-error idgaf
-  const handleError = (error) => {
-    console.log("Error scanning QR code:", error);
-  };
-
-  // const handleFileSelect = () => {
-  //   document.getElementById("legacyUploader")?.click();
-  // };
-  const openImageDialog = () => {
-    try {
-      //@ts-expect-error stfu
-      qrReader.current.openImageDialog()
-    } catch {
-      console.log('stfu')
-    }
-  }
   return (
     <div className="page" style={{ width: "100%", height: "100dvh" }}>
-      <h1>Scan</h1>  
-
-      <QrReader
-        ref={qrReader}
-        delay={100}
-        onScan={handleScan}
-        onError={handleError}
-        resolution={800}
-        legacyMode
-      />
-      <input type="button" value="Submit QR Code" onClick={openImageDialog} />
-      <p>Scanned Data: {data}</p>
+      <h1>Upload QR Code</h1>
+      <input type="file" accept="image/*" onChange={handleFileUpload} />
     </div>
   );
 }
