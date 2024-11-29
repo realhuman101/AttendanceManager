@@ -2,7 +2,7 @@ import { useState } from "react";
 import jsQR from "jsqr";
 
 function Scan() {
-  const [data, setData] = useState("No result");
+  const [data, setData] = useState(false);
 
   //@ts-expect-error stfu
   const handleFileUpload = (event) => {
@@ -24,9 +24,9 @@ function Scan() {
           const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const code = jsQR(imageData.data, imageData.width, imageData.height);
           if (code) {
-            setData(code.data);
+            setData(true);
           } else {
-            setData("No QR code found.");
+            setData(false);
           }
         };
       };
