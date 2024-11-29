@@ -1,68 +1,48 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 //@ts-expect-error idgaf
-import QrScanner from "react-qr-scanner";
+import QrReader from "react-qr-scanner";
 
 function Scan() {
   const [data, setData] = useState("No result");
+  const qrReader = useRef(null);
 
   //@ts-expect-error idgaf
   const handleScan = (result) => {
-    console.log(result)
     if (result) {
+      console.log(result);
       setData(result);
     }
-    setData(result)
   };
 
   //@ts-expect-error idgaf
   const handleError = (error) => {
-    console.error("Error scanning QR code:", error);
+    console.log("Error scanning QR code:", error);
   };
 
-  const handleFileSelect = () => {
-    document.getElementById("legacyUploader")?.click();
-  };
-
+  // const handleFileSelect = () => {
+  //   document.getElementById("legacyUploader")?.click();
+  // };
+  const openImageDialog = () => {
+    try {
+      //@ts-expect-error stfu
+      qrReader.current.openImageDialog()
+    } catch {
+      console.log('stfu')
+    }
+  }
   return (
-    <div className="page" style={{ width: "100%", height: "100vh" }}>
-      <h1>Scan</h1>
-      <QrScanner
+    <div className="page" style={{ width: "100%", height: "100dvh" }}>
+      <h1>Scan</h1>  
+
+      <QrReader
+        ref={qrReader}
         delay={100}
-        onError={handleError}
         onScan={handleScan}
-        style={{ width: "250px", height: "250px" }}
-        legacyMode={true} 
+        onError={handleError}
+        resolution={800}
+        legacyMode
       />
-      <button
-        onClick={handleFileSelect}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-        }}
-      >
-        Upload QR Code
-      </button>
-      <input
-        id="legacyUploader"
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-              const image = event.target?.result;
-              if (image) {
-                (document.querySelector("canvas") as HTMLElement).style.backgroundImage = `url(${image})`;
-              }
-            };
-            reader.readAsDataURL(file);
-          }
-        }}
-      />
+      <input type="button" value="Submit QR Code" onClick={openImageDialog} />
       <p>Scanned Data: {data}</p>
     </div>
   );
