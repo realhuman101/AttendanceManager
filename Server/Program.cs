@@ -30,7 +30,9 @@ namespace Server
                 options.AddPolicy("CorsPolicy",
                     builder =>
                     {
-                        builder.WithOrigins("https://coco-attendance.vercel.app")
+                        builder.WithOrigins("https://coco-attendance.vercel.app",
+                            "http://localhost:5173",
+                            "http://localhost:7270")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials();

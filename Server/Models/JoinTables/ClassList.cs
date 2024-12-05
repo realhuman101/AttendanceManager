@@ -10,6 +10,6 @@ namespace Server.Models.JoinTables
         [ForeignKey("Person")]
         public string PersonID { get; set; }
         [ForeignKey("Class")]
-        public string ClassID { get; set; }
+        public string ClassName { get; set; }
     }
 }

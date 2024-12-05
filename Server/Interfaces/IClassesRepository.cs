@@ -6,9 +6,9 @@ namespace Server.Interfaces
     {
         public List<Class> Get();
 
-        public Class GetByID(string id);
+        public Class GetByName(string name);
 
-        public List<Person> GetPeople(string id);
+        public List<Person> GetPeople(string name);
 
         public bool Save();
     }

@@ -18,28 +18,31 @@ namespace Server.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Configure Class primary key as Name
+            modelBuilder.Entity<Class>()
+                .HasKey(c => c.Name); // ClassName is now the primary key
+
             // Configure the Person-Class many-to-many relationship
             modelBuilder.Entity<ClassList>()
-                .HasKey(cl => new { cl.PersonID, cl.ClassID });
+                .HasKey(cl => new { cl.PersonID, cl.ClassName }); // Composite key
 
-            modelBuilder.Entity<Person>()
-                .HasMany(p => p.Classes)
-                .WithMany(p => p.People)
-                .UsingEntity<ClassList>(
-                    r => r.HasOne(x => x.Class)
-                          .WithMany()
-                          .HasForeignKey(x => x.ClassID),
-                    l => l.HasOne(x => x.Person)
-                          .WithMany()
-                          .HasForeignKey(x => x.PersonID)
-                );
+            modelBuilder.Entity<ClassList>()
+                .HasOne(cl => cl.Class)
+                .WithMany(c => c.ClassList)
+                .HasForeignKey(cl => cl.ClassName)
+                .HasPrincipalKey(c => c.Name); // Foreign key links to ClassName
+
+            modelBuilder.Entity<ClassList>()
+                .HasOne(cl => cl.Person)
+                .WithMany(p => p.ClassList)
+                .HasForeignKey(cl => cl.PersonID);
 
             // Seed data
             modelBuilder.Entity<Person>()
-                .HasData(Seed.Persons());
+                .HasData(Seed.Person());
 
             modelBuilder.Entity<Class>()
-                .HasData(Seed.Classes());
+                .HasData(Seed.Class());
 
             modelBuilder.Entity<ClassList>()
                 .HasData(Seed.ClassList());

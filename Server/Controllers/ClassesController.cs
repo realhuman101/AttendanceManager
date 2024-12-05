@@ -37,9 +37,9 @@ namespace Server.Controllers
 
         [HttpGet("{id}/people")]
         [ProducesResponseType(200)]
-        public IActionResult GetClassPeople(string id)
+        public IActionResult GetClassPeople(string name)
         {
-            var _class = _classesRepository.GetPeople(id);
+            var _class = _classesRepository.GetPeople(name);
 
             if (_class == null)
             {
@@ -53,7 +53,7 @@ namespace Server.Controllers
         [ProducesResponseType(200, Type = typeof(ClassesRepository))]
         public IActionResult GetClass(string id)
         {
-            var _class = _classesRepository.GetByID(id);
+            var _class = _classesRepository.GetByName(id);
 
             if (_class == null)
             {

@@ -2,6 +2,5 @@
 {
     public interface IBaseObject
     {
-        public string ID { get; set; }
     }
 }

@@ -19,15 +19,15 @@ namespace Server.Repository
             return dataContext.Classes.ToList();
         }
 
-        public Class GetByID(string id)
+        public Class GetByName(string name)
         {
-            return dataContext.Classes.FirstOrDefault(c => c.ID == id);
+            return dataContext.Classes.FirstOrDefault(c => c.Name == name);
         }
 
-        public List<Person> GetPeople(string id)
+        public List<Person> GetPeople(string name)
         {
             List<Person> people = dataContext.ClassList
-                                                   .Where(cl => cl.ClassID == id)
+                                                   .Where(cl => cl.ClassID == name)
                                                    .Include(cl => cl.Person)
                                                    .Select(cl => cl.Person)
                                                    .ToList();
